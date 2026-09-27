@@ -1,0 +1,36 @@
+[versions]
+kotlin = "2.4.20"
+librarian = "0.2.2-SNAPSHOT"
+ktor = "3.6.0"
+okio = "3.18.2"
+kotlinx-datetime = "0.8.0"
+kotlinx-serialization = "1.11.0"
+kotlinx-coroutines = "1.11.0"
+klibnanolog = "1.2.1"
+konsist = "0.17.3"
+apollo-mockserver = "0.1.1"
+poko = "0.23.2"
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+librarian = { id = "com.gradleup.librarian", version.ref = "librarian" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+poko = { id = "dev.drewhamilton.poko", version.ref = "poko" }
+
+[libraries]
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+kotlinx-coroutines-jdk9 = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-jdk9", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+klibnanolog = { group = "org.jraf.klibnanolog", name = "klibnanolog", version.ref = "klibnanolog" }
+konsist = { group = "com.lemonappdev", name = "konsist", version.ref = "konsist" }
+apollo-mockserver = { group = "com.apollographql.mockserver", name = "apollo-mockserver", version.ref = "apollo-mockserver" }
