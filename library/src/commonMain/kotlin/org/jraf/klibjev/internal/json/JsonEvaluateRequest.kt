@@ -38,12 +38,12 @@ internal class JsonEvaluateRequest(
 
 @Serializable
 internal sealed interface JsonQuestion {
-  val instructions: String
+  val instructions: JsonElement
 
   @Serializable
   @SerialName("noul")
   class Noul(
-    override val instructions: String,
+    override val instructions: JsonElement,
     val criteria: JsonCriteria? = null,
   ) : JsonQuestion {
     @Serializable
@@ -56,7 +56,7 @@ internal sealed interface JsonQuestion {
   @Serializable
   @SerialName("choice")
   class Choice(
-    override val instructions: String,
+    override val instructions: JsonElement,
     val criteria: Map<String, String?>,
   ) : JsonQuestion {
   }
@@ -64,7 +64,7 @@ internal sealed interface JsonQuestion {
   @Serializable
   @SerialName("score")
   class Score(
-    override val instructions: String,
-    val criteria: List<String>,
+    override val instructions: JsonElement,
+    val criteria: List<JsonElement>,
   ) : JsonQuestion
 }

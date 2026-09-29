@@ -1,5 +1,6 @@
 plugins {
   alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {
@@ -11,6 +12,9 @@ dependencies {
 
   // Date time
   implementation(libs.kotlinx.datetime)
+
+  // Serialization
+  implementation(libs.kotlinx.serialization.json)
 
   // Library
   implementation(project(":klibjev"))

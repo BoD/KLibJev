@@ -27,6 +27,7 @@ package org.jraf.klibjev.internal.json
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 @Serializable
 internal class JsonEvaluateResponse(
@@ -57,7 +58,8 @@ internal sealed interface JsonAnswer {
   @SerialName("score")
   class Score(
     val score: Double,
-    val legend: Map<String, String>,
+    // Values can either be String or Object
+    val legend: Map<String, JsonElement>,
     val probabilities: Map<String, Double>,
     val confidence: Double,
   ) : JsonAnswer

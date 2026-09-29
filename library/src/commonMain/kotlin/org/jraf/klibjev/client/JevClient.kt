@@ -66,3 +66,8 @@ interface JevClient : AutoCloseable {
 }
 
 fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl(configuration)
+
+suspend fun JevClient.evaluate(
+  state: State,
+  vararg questions: Question,
+): Result<Answers> = evaluate(state, questions.toSet())

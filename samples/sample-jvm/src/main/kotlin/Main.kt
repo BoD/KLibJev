@@ -23,28 +23,55 @@
  * limitations under the License.
  */
 
+import kotlinx.serialization.Serializable
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
 import org.jraf.klibjev.client.JevClient.Configuration.Http
 import org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel
-import org.jraf.klibjev.model.Question
+import org.jraf.klibjev.client.evaluate
+import org.jraf.klibjev.model.Choice
+import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question.Choice.Option
+import org.jraf.klibjev.model.Score
 import org.jraf.klibjev.model.State
 
 suspend fun main(av: Array<String>) {
   JevClient(Configuration(apiKey = av[0], http = Http(loggingLevel = LoggingLevel.ALL))).use { jevClient ->
-    val state = State("Bonjour !")
-    val questions = setOf(
-      Question.Noul(instructions = "Is this a greeting?"),
-      Question.Choice(
+    val answers = jevClient.evaluate(
+      state = State("Bonjour !"),
+      Noul(instructions = "Is this a greeting?"),
+
+      Choice(
         instructions = "What is the language of this text?",
-        options = setOf(Option("English"), Option("French"), Option("Spanish")),
+        Option("English"),
+        Option("French"),
+        Option("Spanish"),
       ),
-      Question.Score(
-        instructions = "How warm is this text?",
-        levels = listOf("Very cold", "Cold", "Neutral", "Warm", "Very warm"),
+
+      Score(
+        instructions = ComplexInstructions(
+          question = "How warm is this text?",
+          moreDetails = "The temperature of the text can be interpreted as how friendly or welcoming it feels.",
+        ),
+        ComplexLevel("Very cold", listOf("hey", "yo", "sup")),
+        ComplexLevel("Cold", listOf("Hello", "Hi", "Greetings")),
+        ComplexLevel("Neutral", listOf("Good day", "Salutations")),
+        ComplexLevel("Warm", listOf("Hey there!", "Hiya!", "Howdy!")),
+        ComplexLevel("Very warm", listOf("Hello, friend!", "Hi there, buddy!", "Greetings, my dear!")),
       ),
-    )
-    println("Answers: ${jevClient.evaluate(state, questions).getOrThrow()}")
+    ).getOrThrow()
+    println("Answers: $answers")
   }
 }
+
+@Serializable
+private data class ComplexInstructions(
+  val question: String,
+  val moreDetails: String,
+)
+
+@Serializable
+private data class ComplexLevel(
+  val what: String,
+  val examples: List<String>,
+)

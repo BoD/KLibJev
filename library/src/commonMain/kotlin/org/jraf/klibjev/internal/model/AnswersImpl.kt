@@ -40,6 +40,6 @@ internal data class ChoiceImpl(
 
 internal data class ScoreImpl(
   override val value: Double,
-  override val probabilities: Map<String, Double>,
+  override val probabilities: Map<Question.Score.Level, Double>,
   override val confidence: Double,
 ) : Answers.Answer.Score

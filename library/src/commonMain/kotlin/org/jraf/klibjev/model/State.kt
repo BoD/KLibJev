@@ -25,21 +25,28 @@
 
 package org.jraf.klibjev.model
 
+import dev.drewhamilton.poko.Poko
 import kotlin.jvm.JvmInline
 
 sealed interface State {
   @JvmInline
-  value class StringState(val value: String) : State
+  value class String(val value: kotlin.String) : State
+
 
   @JvmInline
-  value class StringListState(val value: List<String>) : State
+  value class StringList(val value: List<kotlin.String>) : State
 
   /**
    * [T] must be marked [kotlinx.serialization.Serializable].
    */
-  class ObjectState<T : Any>(val value: T) : State
+  @Poko
+  class Object<T : Any>(val value: T) : State
 }
 
-fun State(value: String): State = State.StringState(value)
-fun State(value: List<String>): State = State.StringListState(value)
-fun <T : Any> State(value: T): State = State.ObjectState(value)
+fun State(value: String): State = State.String(value)
+fun State(value: List<String>): State = State.StringList(value)
+
+/**
+ * [T] must be marked [kotlinx.serialization.Serializable].
+ */
+fun <T : Any> State(value: T): State = State.Object(value)

@@ -42,6 +42,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.serializer
 import org.jraf.klibjev.client.JevClient
@@ -145,19 +146,16 @@ internal class JevClientImpl(
 
 private fun State.toJsonState(): JsonElement {
   return when (this) {
-    is State.StringState -> {
+    is State.String -> {
       JsonPrimitive(this.value)
     }
 
-    is State.StringListState -> {
+    is State.StringList -> {
       JsonArray(this.value.map { JsonPrimitive(it) })
     }
 
-    is State.ObjectState<*> -> {
-      @Suppress("UNCHECKED_CAST")
-      @OptIn(InternalSerializationApi::class)
-      // A bit hacky - here the compiler doesn't know the type of the value, so we need to pass the serializer obtained dynamically
-      Json.encodeToJsonElement(this.value::class.serializer() as KSerializer<Any>, this.value)
+    is State.Object<*> -> {
+      encodeToJsonElement(this.value)
     }
   }
 }
@@ -166,19 +164,47 @@ private fun Set<Question>.toJsonQuestionsMap(questionIds: Map<String, Question>)
   return this.associate { question ->
     questionIds.entries.first { it.value == question }.key to when (question) {
       is Question.Noul -> JsonQuestion.Noul(
-        instructions = question.instructions,
+        instructions = question.instructions.toJsonInstructions(),
         criteria = question.criteria?.let { JsonQuestion.Noul.JsonCriteria(it.`true`, it.`false`) },
       )
 
       is Question.Choice -> JsonQuestion.Choice(
-        instructions = question.instructions,
+        instructions = question.instructions.toJsonInstructions(),
         criteria = question.options.associate { it.name to it.description },
       )
 
       is Question.Score -> JsonQuestion.Score(
-        instructions = question.instructions,
-        criteria = question.levels,
+        instructions = question.instructions.toJsonInstructions(),
+        criteria = question.levels.map { it.toJsonElement() },
       )
+    }
+  }
+}
+
+private fun Question.Instructions.toJsonInstructions(): JsonElement {
+  return when (this) {
+    is Question.Instructions.String -> {
+      JsonPrimitive(this.value)
+    }
+
+    is Question.Instructions.StringList -> {
+      JsonArray(this.value.map { JsonPrimitive(it) })
+    }
+
+    is Question.Instructions.Object<*> -> {
+      encodeToJsonElement(this.value)
+    }
+  }
+}
+
+private fun Question.Score.Level.toJsonElement(): JsonElement {
+  return when (this) {
+    is Question.Score.Level.String -> {
+      JsonPrimitive(this.value)
+    }
+
+    is Question.Score.Level.Object<*> -> {
+      encodeToJsonElement(this.value)
     }
   }
 }
@@ -211,10 +237,29 @@ private fun JsonAnswer.toAnswer(question: Question): Answers.Answer {
     is JsonAnswer.Score -> ScoreImpl(
       value = this.score,
       probabilities = this.probabilities.map { (levelIndex, probability) ->
-        val level = this.legend[levelIndex]!!
+        val level = when (val levelJsonElement: JsonElement = this.legend[levelIndex]!!) {
+          is JsonPrimitive -> Question.Score.Level.String(levelJsonElement.content)
+          is JsonObject -> {
+            // Find back the level from the question by comparing the JSON representations.
+            // A bit hacky and not efficient, but this ensures we return the same instance as the one in the question.
+            // We can avoid this if we trust the API to return the levels in the same order as the question, but I don't think it is guaranteed.
+            val level =
+              (question as Question.Score).levels.first { it is Question.Score.Level.Object<*> && encodeToJsonElement(it.value) == levelJsonElement }
+            Question.Score.Level.Object(level)
+          }
+
+          else -> error("Unknown level JSON element type: ${levelJsonElement::class.simpleName}")
+        }
         level to probability
       }.toMap(),
       confidence = this.confidence,
     )
   }
+}
+
+@Suppress("UNCHECKED_CAST")
+@OptIn(InternalSerializationApi::class)
+private fun encodeToJsonElement(o: Any): JsonElement {
+  // A bit hacky - here the compiler doesn't know the type of the value, so we need to pass the serializer obtained dynamically
+  return Json.encodeToJsonElement(o::class.serializer() as KSerializer<Any>, o)
 }

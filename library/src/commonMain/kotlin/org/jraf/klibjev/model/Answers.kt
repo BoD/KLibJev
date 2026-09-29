@@ -47,7 +47,7 @@ interface Answers {
 
     interface Score : Answer {
       val value: Double
-      val probabilities: Map<String, Double>
+      val probabilities: Map<Question.Score.Level, Double>
       val confidence: Double
     }
   }
