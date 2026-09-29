@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":klibjev/appleMain":[":klibjev/nativeMain"],":klibjev/commonMain":[],":klibjev/jvmMain":[":klibjev/commonMain"],":klibjev/macosArm64Main":[":klibjev/macosMain"],":klibjev/macosMain":[":klibjev/appleMain"],":klibjev/nativeMain":[":klibjev/commonMain"]}'

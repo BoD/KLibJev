@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:klibjev
+org.jraf.klibjev
+org.jraf.klibjev.client
+org.jraf.klibjev.model
