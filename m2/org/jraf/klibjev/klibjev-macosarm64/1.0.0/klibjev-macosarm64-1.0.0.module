@@ -121,11 +121,11 @@
         {
           "name": "klibjev-macosArm64Main-1.0.0.klib",
           "url": "klibjev-macosarm64-1.0.0.klib",
-          "size": 67212,
-          "sha512": "30c3fe1139d9a02af0fe56aa5a66e0984e9ae3d8eb40304f28c1973116527a0f6105c59dbda6fca8808c47795172f0f671a58b026a209c347b0a749de98aad09",
-          "sha256": "28aea325713ae170029140b2fcbaeb7ee4b044dba873ccf2992f16c43c66f5e6",
-          "sha1": "f577584ab7449d67e8bb46d03e7d0831fe69e23a",
-          "md5": "c033f0059caf409a08c6766d84c11672"
+          "size": 70092,
+          "sha512": "04f9afe168c64f59ea9d9c9b4943dc59ecc27d9b99494aca11b89abb9466dbc41a5f4ae899dc5394aecf9dad44dfc649623a0eda09597759eaec71524a7a73d0",
+          "sha256": "28a48bcc3ae23fc2348980130270bb99966fbbdb6b9e743d51268083097a524a",
+          "sha1": "f30f91a3823c2016c5e381857e980e0643a55d9f",
+          "md5": "3dd5b8d1dd2e033934d006fc96bcc7f6"
         }
       ]
     },
@@ -144,11 +144,11 @@
         {
           "name": "klibjev-macosarm64-1.0.0-sources.jar",
           "url": "klibjev-macosarm64-1.0.0-sources.jar",
-          "size": 13336,
-          "sha512": "062eebac79b4a9e816858d39efbc0cc034a5f3b0a4981a66a5bb780a5dbaa5cdd245b1e74a6360b2d25c8ca4b9e566923cf2dd95bee049d07f358b8af5b4eaeb",
-          "sha256": "8df422d558c814e4e795f5d8b92b6cc78902d66d0a20fd9ee05c50d92076032e",
-          "sha1": "fbe5d85148f8fd5f382e016bfb5d60230ac0631c",
-          "md5": "d848ceb0e5aeed92b81a7865f70bda9d"
+          "size": 13602,
+          "sha512": "d03f5c30bedfe539add9f42ef4d9f1445ecac6d5c55b9c2040758947d88f4e001482592f2c892ed54b76b1b90fcd110e8d39a2315bfcd80f6082221dc7591023",
+          "sha256": "ed21512479f5513183c778aa76dfb472f328e929e1ce768ef01c3d31c84b0a64",
+          "sha1": "249ce46cb97fd3c0a86d5bae2570d3e5c25c7bde",
+          "md5": "4591e562e6362242ee4cce1edaf16865"
         }
       ]
     },

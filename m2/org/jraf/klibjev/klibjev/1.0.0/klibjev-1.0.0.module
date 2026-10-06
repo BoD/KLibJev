@@ -35,11 +35,11 @@
         {
           "name": "klibjev-metadata-1.0.0.jar",
           "url": "klibjev-1.0.0.jar",
-          "size": 11617,
-          "sha512": "0aa3f7a18bac95bff13f2f1825fb849465ed45ada97b0e9d074f3c56535a03ecb6ba14740f5e222bedfc3a2ce3b3f7385ee016b03b9353ab2231ed99da89766f",
-          "sha256": "7d11216e7e7fb4c1301ba4899fae3da511faf8b38b22385e2e90bb0ec30f67be",
-          "sha1": "1e72c031147081cd28297206c76d19fcf3632766",
-          "md5": "f6af07ba6846e5cc520e5515a068d311"
+          "size": 11949,
+          "sha512": "a5dba05750bb8d6094cf8ed810767f08131a1dc688aef01ab70fbc684eb9ff3f1324130624627e83e342aa1ccdb05d0b1eabf9fc25ac407e5f6cdf5db70cd878",
+          "sha256": "122998d511f58bf94b0fe83875b7152375fd693993623ccadb45140ba33bb57e",
+          "sha1": "f7c14c797d44fc0050997a50566eb9fa4b71fab3",
+          "md5": "5aa05c2acc9947e94719367ab6d637bc"
         }
       ]
     },
@@ -57,11 +57,11 @@
         {
           "name": "klibjev-kotlin-1.0.0-sources.jar",
           "url": "klibjev-1.0.0-sources.jar",
-          "size": 13336,
-          "sha512": "062eebac79b4a9e816858d39efbc0cc034a5f3b0a4981a66a5bb780a5dbaa5cdd245b1e74a6360b2d25c8ca4b9e566923cf2dd95bee049d07f358b8af5b4eaeb",
-          "sha256": "8df422d558c814e4e795f5d8b92b6cc78902d66d0a20fd9ee05c50d92076032e",
-          "sha1": "fbe5d85148f8fd5f382e016bfb5d60230ac0631c",
-          "md5": "d848ceb0e5aeed92b81a7865f70bda9d"
+          "size": 13602,
+          "sha512": "d03f5c30bedfe539add9f42ef4d9f1445ecac6d5c55b9c2040758947d88f4e001482592f2c892ed54b76b1b90fcd110e8d39a2315bfcd80f6082221dc7591023",
+          "sha256": "ed21512479f5513183c778aa76dfb472f328e929e1ce768ef01c3d31c84b0a64",
+          "sha1": "249ce46cb97fd3c0a86d5bae2570d3e5c25c7bde",
+          "md5": "4591e562e6362242ee4cce1edaf16865"
         }
       ]
     },

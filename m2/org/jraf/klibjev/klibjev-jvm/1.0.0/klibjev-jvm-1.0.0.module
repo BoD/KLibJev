@@ -37,11 +37,11 @@
         {
           "name": "klibjev-jvm-1.0.0.jar",
           "url": "klibjev-jvm-1.0.0.jar",
-          "size": 126305,
-          "sha512": "a72967427b924d212ce56af8aa6b8a37c2932b72fb51f848399ee2dbf94a3c4472c0af22aca2106e90dfe5ca82f2a4bb6a5ac2e52c60f088a604365b5a364ca6",
-          "sha256": "00011f49ff02b1787a5537b3f55443122e580cabbd3585961df7501d6685b832",
-          "sha1": "6850b128958c6ca5047766ac7d320e40c7500cb6",
-          "md5": "db75192a5aec6b9b7c3822155e46fc5d"
+          "size": 134184,
+          "sha512": "1e4361f7c43359ed525f3188b01237f2502ae3c9179ec7e300f4294c62f06dd0b3f375bc01f9c5a1d5aa476a40b844f16d1632de9f7b0a3ca83ab44faacef20d",
+          "sha256": "eddd7b4ca9a7b5ca5520fc1a591c540107ec78ee965d91c5f860ee39c7fad112",
+          "sha1": "af57be1a0fc81ccf863b1115c7916226eb13d32e",
+          "md5": "0b293d7f769c95f40024d2ead1c14e72"
         }
       ]
     },
@@ -151,11 +151,11 @@
         {
           "name": "klibjev-jvm-1.0.0.jar",
           "url": "klibjev-jvm-1.0.0.jar",
-          "size": 126305,
-          "sha512": "a72967427b924d212ce56af8aa6b8a37c2932b72fb51f848399ee2dbf94a3c4472c0af22aca2106e90dfe5ca82f2a4bb6a5ac2e52c60f088a604365b5a364ca6",
-          "sha256": "00011f49ff02b1787a5537b3f55443122e580cabbd3585961df7501d6685b832",
-          "sha1": "6850b128958c6ca5047766ac7d320e40c7500cb6",
-          "md5": "db75192a5aec6b9b7c3822155e46fc5d"
+          "size": 134184,
+          "sha512": "1e4361f7c43359ed525f3188b01237f2502ae3c9179ec7e300f4294c62f06dd0b3f375bc01f9c5a1d5aa476a40b844f16d1632de9f7b0a3ca83ab44faacef20d",
+          "sha256": "eddd7b4ca9a7b5ca5520fc1a591c540107ec78ee965d91c5f860ee39c7fad112",
+          "sha1": "af57be1a0fc81ccf863b1115c7916226eb13d32e",
+          "md5": "0b293d7f769c95f40024d2ead1c14e72"
         }
       ]
     },
@@ -174,11 +174,11 @@
         {
           "name": "klibjev-jvm-1.0.0-sources.jar",
           "url": "klibjev-jvm-1.0.0-sources.jar",
-          "size": 13336,
-          "sha512": "062eebac79b4a9e816858d39efbc0cc034a5f3b0a4981a66a5bb780a5dbaa5cdd245b1e74a6360b2d25c8ca4b9e566923cf2dd95bee049d07f358b8af5b4eaeb",
-          "sha256": "8df422d558c814e4e795f5d8b92b6cc78902d66d0a20fd9ee05c50d92076032e",
-          "sha1": "fbe5d85148f8fd5f382e016bfb5d60230ac0631c",
-          "md5": "d848ceb0e5aeed92b81a7865f70bda9d"
+          "size": 13602,
+          "sha512": "d03f5c30bedfe539add9f42ef4d9f1445ecac6d5c55b9c2040758947d88f4e001482592f2c892ed54b76b1b90fcd110e8d39a2315bfcd80f6082221dc7591023",
+          "sha256": "ed21512479f5513183c778aa76dfb472f328e929e1ce768ef01c3d31c84b0a64",
+          "sha1": "249ce46cb97fd3c0a86d5bae2570d3e5c25c7bde",
+          "md5": "4591e562e6362242ee4cce1edaf16865"
         }
       ]
     }
