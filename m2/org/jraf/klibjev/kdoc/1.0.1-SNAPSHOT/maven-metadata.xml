@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.jraf.klibjev</groupId>
+  <artifactId>kdoc</artifactId>
+  <versioning>
+    <lastUpdated>20261006145639</lastUpdated>
+    <snapshot>
+      <timestamp>20261006.145639</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.1-20261006.145639-1</value>
+        <updated>20261006145639</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>javadoc</classifier>
+        <extension>jar</extension>
+        <value>1.0.1-20261006.145639-1</value>
+        <updated>20261006145639</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>1.0.1-SNAPSHOT</version>
+</metadata>

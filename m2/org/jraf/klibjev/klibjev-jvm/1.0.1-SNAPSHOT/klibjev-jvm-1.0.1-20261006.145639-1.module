@@ -1,0 +1,186 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../klibjev/1.0.1-SNAPSHOT/klibjev-1.0.1-SNAPSHOT.module",
+    "group": "org.jraf.klibjev",
+    "module": "klibjev",
+    "version": "1.0.1-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "klibjev-jvm-1.0.1-SNAPSHOT.jar",
+          "url": "klibjev-jvm-1.0.1-SNAPSHOT.jar",
+          "size": 134193,
+          "sha512": "20e29bcf3092229ee7c095c749ddb973142aa074b01f00c37559c2b7cb3542163b1eb6a865fc24114ffc9cbdf67cdbecfcef2dff8419944255e0f06eb0f5f2b9",
+          "sha256": "8bd1c69335f7be5681800c192fae911339a8b2d536ae0192a79ce1a359d40bcf",
+          "sha1": "b53d6d8aa15d02b3bbfb48ad9b02b96316b65c5b",
+          "md5": "36aad2389ba8f1316cab7dab0b7146ae"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-jdk9",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-okhttp",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "dev.drewhamilton.poko",
+          "module": "poko-annotations",
+          "version": {
+            "requires": "0.23.2"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-auth",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.6.0"
+          }
+        },
+        {
+          "group": "com.squareup.okio",
+          "module": "okio",
+          "version": {
+            "requires": "3.18.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-datetime",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jraf.klibnanolog",
+          "module": "klibnanolog",
+          "version": {
+            "requires": "1.2.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "klibjev-jvm-1.0.1-SNAPSHOT.jar",
+          "url": "klibjev-jvm-1.0.1-SNAPSHOT.jar",
+          "size": 134193,
+          "sha512": "20e29bcf3092229ee7c095c749ddb973142aa074b01f00c37559c2b7cb3542163b1eb6a865fc24114ffc9cbdf67cdbecfcef2dff8419944255e0f06eb0f5f2b9",
+          "sha256": "8bd1c69335f7be5681800c192fae911339a8b2d536ae0192a79ce1a359d40bcf",
+          "sha1": "b53d6d8aa15d02b3bbfb48ad9b02b96316b65c5b",
+          "md5": "36aad2389ba8f1316cab7dab0b7146ae"
+        }
+      ]
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "klibjev-jvm-1.0.1-SNAPSHOT-sources.jar",
+          "url": "klibjev-jvm-1.0.1-SNAPSHOT-sources.jar",
+          "size": 13609,
+          "sha512": "8551ec0cb745e407dd48bee8d784e0823fd8796a15841d49bb991085ee0a5ae8da1c60324610e101012980f7fae4069cdd5f741644a6455ae00887ced50d298e",
+          "sha256": "cac8d9426db27a58ef2b02887217307daf53572cb6746f133966b534c2ecf4c8",
+          "sha1": "cfdbf2b94afd6f81c031ea95f94a90b8eb7af55e",
+          "md5": "440d7575e897d8d798d5ebfd857f072c"
+        }
+      ]
+    }
+  ]
+}
