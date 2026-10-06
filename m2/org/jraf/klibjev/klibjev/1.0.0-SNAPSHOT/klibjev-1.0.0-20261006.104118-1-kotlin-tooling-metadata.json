@@ -1,7 +1,7 @@
 {
     "schemaVersion": "1.1.0",
     "buildSystem": "Gradle",
-    "buildSystemVersion": "9.7.1",
+    "buildSystemVersion": "9.8.0",
     "buildPlugin": "org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper",
     "buildPluginVersion": "2.4.20",
     "projectSettings": {
