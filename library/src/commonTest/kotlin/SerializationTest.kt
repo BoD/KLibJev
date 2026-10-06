@@ -23,6 +23,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("unused", "PropertyName")
+
 package org.jraf.klibjev
 
 import com.apollographql.mockserver.MockServer
@@ -37,7 +39,10 @@ import org.jraf.klibjev.internal.model.AnswersImpl
 import org.jraf.klibjev.internal.model.ChoiceImpl
 import org.jraf.klibjev.internal.model.NoulImpl
 import org.jraf.klibjev.internal.model.ScoreImpl
+import org.jraf.klibjev.model.Choice
+import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question
+import org.jraf.klibjev.model.Score
 import org.jraf.klibjev.model.State
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -49,7 +54,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
-          questions = setOf(Question.Noul(instructions = "Does this convey urgency?")),
+          questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
           expected = """{"model":"jev-latest","state":"Help! My payouts have been failing for 3 days.","questions":{"q0":{"type":"noul","instructions":"Does this convey urgency?"}}}""",
@@ -65,7 +70,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State(listOf("Help! My payouts have been failing for 3 days.")),
-          questions = setOf(Question.Noul(instructions = "Does this convey urgency?")),
+          questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
           expected = """{"model":"jev-latest","state":["Help! My payouts have been failing for 3 days."],"questions":{"q0":{"type":"noul","instructions":"Does this convey urgency?"}}}""",
@@ -101,7 +106,7 @@ class SerializationTest {
 
         jevClient.evaluate(
           state = state,
-          questions = setOf(Question.Noul(instructions = "Is the customer asking for a refund?")),
+          questions = setOf(Noul(instructions = "Is the customer asking for a refund?")),
         )
         assertEquals(
           expected = """{"model":"jev-latest","state":{"ticket":{"subject":"Duplicate charge","messages":[{"from":"customer","text":"I was charged twice for order A-104. Please refund the duplicate."},{"from":"support","text":"We are checking the charges."}]},"order":{"id":"A-104","charges":[{"amount_usd":49,"status":"captured"},{"amount_usd":49,"status":"captured"}]},"refund_policy":"Duplicate charges are eligible for a refund."},"questions":{"q0":{"type":"noul","instructions":"Is the customer asking for a refund?"}}}""",
@@ -168,12 +173,12 @@ class SerializationTest {
         val answers = jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
           questions = setOf(
-            Question.Noul(instructions = "Does this convey urgency?"),
-            Question.Choice(
+            Noul(instructions = "Does this convey urgency?"),
+            Choice(
               instructions = "What is the language of this text?",
               options = setOf(Question.Choice.Option("English"), Question.Choice.Option("French"), Question.Choice.Option("Spanish")),
             ),
-            Question.Score(
+            Score(
               instructions = "How warm is this text?",
               levels = listOf("Very cold", "Cold", "Neutral", "Warm", "Very warm"),
             ),
@@ -186,8 +191,8 @@ class SerializationTest {
         assertEquals(
           expected = AnswersImpl(
             answers = mapOf(
-              Question.Noul(instructions = "Does this convey urgency?") to NoulImpl(value = 0.99),
-              Question.Choice(
+              Noul(instructions = "Does this convey urgency?") to NoulImpl(value = 0.99),
+              Choice(
                 instructions = "What is the language of this text?",
                 options = setOf(Question.Choice.Option("English"), Question.Choice.Option("French"), Question.Choice.Option("Spanish")),
               ) to ChoiceImpl(
@@ -199,17 +204,17 @@ class SerializationTest {
                 ),
                 confidence = 1.0,
               ),
-              Question.Score(
+              Score(
                 instructions = "How warm is this text?",
                 levels = listOf("Very cold", "Cold", "Neutral", "Warm", "Very warm"),
               ) to ScoreImpl(
                 value = 2.65,
                 probabilities = mapOf(
-                  "Very cold" to 0.0,
-                  "Cold" to 0.0,
-                  "Neutral" to 0.35,
-                  "Warm" to 0.64,
-                  "Very warm" to 0.01,
+                  Question.Score.Level.String("Very cold") to 0.0,
+                  Question.Score.Level.String("Cold") to 0.0,
+                  Question.Score.Level.String("Neutral") to 0.35,
+                  Question.Score.Level.String("Warm") to 0.64,
+                  Question.Score.Level.String("Very warm") to 0.01,
                 ),
                 confidence = 0.69,
               ),

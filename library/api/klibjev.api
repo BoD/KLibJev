@@ -42,6 +42,7 @@ public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
 
 public final class org/jraf/klibjev/client/JevClientKt {
 	public static final fun JevClient (Lorg/jraf/klibjev/client/JevClient$Configuration;)Lorg/jraf/klibjev/client/JevClient;
+	public static final fun evaluate (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;[Lorg/jraf/klibjev/model/Question;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class org/jraf/klibjev/model/Answers {
@@ -68,13 +69,13 @@ public abstract interface class org/jraf/klibjev/model/Answers$Answer$Score : or
 }
 
 public abstract interface class org/jraf/klibjev/model/Question {
-	public abstract fun getInstructions ()Ljava/lang/String;
+	public abstract fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
 }
 
 public final class org/jraf/klibjev/model/Question$Choice : org/jraf/klibjev/model/Question {
-	public fun <init> (Ljava/lang/String;Ljava/util/Set;)V
+	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/Set;)V
 	public fun equals (Ljava/lang/Object;)Z
-	public fun getInstructions ()Ljava/lang/String;
+	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
 	public final fun getOptions ()Ljava/util/Set;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -90,12 +91,51 @@ public final class org/jraf/klibjev/model/Question$Choice$Option {
 	public fun toString ()Ljava/lang/String;
 }
 
+public abstract interface class org/jraf/klibjev/model/Question$Instructions {
+}
+
+public final class org/jraf/klibjev/model/Question$Instructions$Object : org/jraf/klibjev/model/Question$Instructions {
+	public fun <init> (Ljava/lang/Object;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/Question$Instructions$String : org/jraf/klibjev/model/Question$Instructions {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Instructions$String;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/Question$Instructions$StringList : org/jraf/klibjev/model/Question$Instructions {
+	public static final synthetic fun box-impl (Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Instructions$StringList;
+	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
+	public final fun getValue ()Ljava/util/List;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/util/List;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/util/List;
+}
+
 public final class org/jraf/klibjev/model/Question$Noul : org/jraf/klibjev/model/Question {
-	public fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)V
-	public synthetic fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)V
+	public synthetic fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getCriteria ()Lorg/jraf/klibjev/model/Question$Noul$Criteria;
-	public fun getInstructions ()Ljava/lang/String;
+	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -110,38 +150,27 @@ public final class org/jraf/klibjev/model/Question$Noul$Criteria {
 }
 
 public final class org/jraf/klibjev/model/Question$Score : org/jraf/klibjev/model/Question {
-	public fun <init> (Ljava/lang/String;Ljava/util/List;)V
+	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/List;)V
 	public fun equals (Ljava/lang/Object;)Z
-	public fun getInstructions ()Ljava/lang/String;
+	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
 	public final fun getLevels ()Ljava/util/List;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class org/jraf/klibjev/model/State {
+public abstract interface class org/jraf/klibjev/model/Question$Score$Level {
 }
 
-public final class org/jraf/klibjev/model/State$ObjectState : org/jraf/klibjev/model/State {
+public final class org/jraf/klibjev/model/Question$Score$Level$Object : org/jraf/klibjev/model/Question$Score$Level {
 	public fun <init> (Ljava/lang/Object;)V
-	public final fun getValue ()Ljava/lang/Object;
-}
-
-public final class org/jraf/klibjev/model/State$StringListState : org/jraf/klibjev/model/State {
-	public static final synthetic fun box-impl (Ljava/util/List;)Lorg/jraf/klibjev/model/State$StringListState;
-	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
 	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
-	public final fun getValue ()Ljava/util/List;
+	public final fun getValue ()Ljava/lang/Object;
 	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/util/List;)I
 	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class org/jraf/klibjev/model/State$StringState : org/jraf/klibjev/model/State {
-	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/State$StringState;
+public final class org/jraf/klibjev/model/Question$Score$Level$String : org/jraf/klibjev/model/Question$Score$Level {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score$Level$String;
 	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
 	public fun equals (Ljava/lang/Object;)Z
 	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
@@ -152,6 +181,72 @@ public final class org/jraf/klibjev/model/State$StringState : org/jraf/klibjev/m
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/QuestionKt {
+	public static final fun Choice (Ljava/lang/Object;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Choice (Ljava/lang/Object;[Lorg/jraf/klibjev/model/Question$Choice$Option;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Choice (Ljava/lang/String;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Choice (Ljava/lang/String;[Lorg/jraf/klibjev/model/Question$Choice$Option;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Choice (Ljava/util/List;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Choice (Ljava/util/List;[Lorg/jraf/klibjev/model/Question$Choice$Option;)Lorg/jraf/klibjev/model/Question$Choice;
+	public static final fun Noul (Ljava/lang/Object;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static final fun Noul (Ljava/lang/String;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static final fun Noul (Ljava/util/List;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static synthetic fun Noul$default (Ljava/lang/Object;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILjava/lang/Object;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static synthetic fun Noul$default (Ljava/lang/String;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILjava/lang/Object;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static synthetic fun Noul$default (Ljava/util/List;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILjava/lang/Object;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static final fun Score (Ljava/lang/Object;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/lang/Object;[Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/lang/Object;[Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/lang/String;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/lang/String;[Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/lang/String;[Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/util/List;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/util/List;[Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun Score (Ljava/util/List;[Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun ScoreObjects (Ljava/lang/Object;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun ScoreObjects (Ljava/lang/String;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+	public static final fun ScoreObjects (Ljava/util/List;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
+}
+
+public abstract interface class org/jraf/klibjev/model/State {
+}
+
+public final class org/jraf/klibjev/model/State$Object : org/jraf/klibjev/model/State {
+	public fun <init> (Ljava/lang/Object;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/State$String : org/jraf/klibjev/model/State {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/State$String;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/State$StringList : org/jraf/klibjev/model/State {
+	public static final synthetic fun box-impl (Ljava/util/List;)Lorg/jraf/klibjev/model/State$StringList;
+	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
+	public final fun getValue ()Ljava/util/List;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/util/List;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
 public final class org/jraf/klibjev/model/StateKt {

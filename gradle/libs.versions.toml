@@ -8,7 +8,7 @@ kotlinx-serialization = "1.11.0"
 kotlinx-coroutines = "1.11.0"
 klibnanolog = "1.2.1"
 konsist = "0.17.3"
-apollo-mockserver = "0.1.1"
+apollo-mockserver = "0.3.1"
 poko = "0.23.2"
 
 [plugins]
