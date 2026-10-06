@@ -35,8 +35,8 @@ import kotlinx.serialization.Serializable
 import okio.use
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
-import org.jraf.klibjev.internal.model.AnswersImpl
 import org.jraf.klibjev.internal.model.ChoiceImpl
+import org.jraf.klibjev.internal.model.EvaluateResponseImpl
 import org.jraf.klibjev.internal.model.NoulImpl
 import org.jraf.klibjev.internal.model.ScoreImpl
 import org.jraf.klibjev.model.Choice
@@ -189,7 +189,8 @@ class SerializationTest {
           actual = mockServer.takeRequest().body.utf8(),
         )
         assertEquals(
-          expected = AnswersImpl(
+          expected = EvaluateResponseImpl(
+            model = "jev-1.13.0",
             answers = mapOf(
               Noul(instructions = "Does this convey urgency?") to NoulImpl(value = 0.99),
               Choice(
@@ -218,6 +219,10 @@ class SerializationTest {
                 ),
                 confidence = 0.69,
               ),
+            ),
+            usage = org.jraf.klibjev.internal.model.UsageImpl(
+              inputTokens = 361,
+              outputTokens = 71,
             ),
           ),
           actual = answers.getOrThrow(),

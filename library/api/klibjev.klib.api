@@ -7,7 +7,7 @@
 
 // Library unique name: <org.jraf.klibjev:klibjev>
 abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { // org.jraf.klibjev.client/JevClient|null[0]
-    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Question>): kotlin/Result<org.jraf.klibjev.model/Answers> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Question>){}[0]
+    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Question>): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Question>){}[0]
 
     final class Configuration { // org.jraf.klibjev.client/JevClient.Configuration|null[0]
         constructor <init>(kotlin/String, kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http = ...) // org.jraf.klibjev.client/JevClient.Configuration.<init>|<init>(kotlin.String;kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http){}[0]
@@ -55,32 +55,43 @@ abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { //
     }
 }
 
-abstract interface org.jraf.klibjev.model/Answers { // org.jraf.klibjev.model/Answers|null[0]
-    abstract val answers // org.jraf.klibjev.model/Answers.answers|{}answers[0]
-        abstract fun <get-answers>(): kotlin.collections/Map<org.jraf.klibjev.model/Question, org.jraf.klibjev.model/Answers.Answer> // org.jraf.klibjev.model/Answers.answers.<get-answers>|<get-answers>(){}[0]
+abstract interface org.jraf.klibjev.model/EvaluateResponse { // org.jraf.klibjev.model/EvaluateResponse|null[0]
+    abstract val answers // org.jraf.klibjev.model/EvaluateResponse.answers|{}answers[0]
+        abstract fun <get-answers>(): kotlin.collections/Map<org.jraf.klibjev.model/Question, org.jraf.klibjev.model/EvaluateResponse.Answer> // org.jraf.klibjev.model/EvaluateResponse.answers.<get-answers>|<get-answers>(){}[0]
+    abstract val model // org.jraf.klibjev.model/EvaluateResponse.model|{}model[0]
+        abstract fun <get-model>(): kotlin/String // org.jraf.klibjev.model/EvaluateResponse.model.<get-model>|<get-model>(){}[0]
+    abstract val usage // org.jraf.klibjev.model/EvaluateResponse.usage|{}usage[0]
+        abstract fun <get-usage>(): org.jraf.klibjev.model/EvaluateResponse.Usage // org.jraf.klibjev.model/EvaluateResponse.usage.<get-usage>|<get-usage>(){}[0]
 
-    sealed interface Answer { // org.jraf.klibjev.model/Answers.Answer|null[0]
-        abstract interface Choice : org.jraf.klibjev.model/Answers.Answer { // org.jraf.klibjev.model/Answers.Answer.Choice|null[0]
-            abstract val confidence // org.jraf.klibjev.model/Answers.Answer.Choice.confidence|{}confidence[0]
-                abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/Answers.Answer.Choice.confidence.<get-confidence>|<get-confidence>(){}[0]
-            abstract val highestProbability // org.jraf.klibjev.model/Answers.Answer.Choice.highestProbability|{}highestProbability[0]
-                abstract fun <get-highestProbability>(): org.jraf.klibjev.model/Question.Choice.Option // org.jraf.klibjev.model/Answers.Answer.Choice.highestProbability.<get-highestProbability>|<get-highestProbability>(){}[0]
-            abstract val probabilities // org.jraf.klibjev.model/Answers.Answer.Choice.probabilities|{}probabilities[0]
-                abstract fun <get-probabilities>(): kotlin.collections/Map<org.jraf.klibjev.model/Question.Choice.Option, kotlin/Double> // org.jraf.klibjev.model/Answers.Answer.Choice.probabilities.<get-probabilities>|<get-probabilities>(){}[0]
+    abstract interface Usage { // org.jraf.klibjev.model/EvaluateResponse.Usage|null[0]
+        abstract val inputTokens // org.jraf.klibjev.model/EvaluateResponse.Usage.inputTokens|{}inputTokens[0]
+            abstract fun <get-inputTokens>(): kotlin/Int // org.jraf.klibjev.model/EvaluateResponse.Usage.inputTokens.<get-inputTokens>|<get-inputTokens>(){}[0]
+        abstract val outputTokens // org.jraf.klibjev.model/EvaluateResponse.Usage.outputTokens|{}outputTokens[0]
+            abstract fun <get-outputTokens>(): kotlin/Int // org.jraf.klibjev.model/EvaluateResponse.Usage.outputTokens.<get-outputTokens>|<get-outputTokens>(){}[0]
+    }
+
+    sealed interface Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer|null[0]
+        abstract interface Choice : org.jraf.klibjev.model/EvaluateResponse.Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice|null[0]
+            abstract val confidence // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.confidence|{}confidence[0]
+                abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.confidence.<get-confidence>|<get-confidence>(){}[0]
+            abstract val highestProbability // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.highestProbability|{}highestProbability[0]
+                abstract fun <get-highestProbability>(): org.jraf.klibjev.model/Question.Choice.Option // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.highestProbability.<get-highestProbability>|<get-highestProbability>(){}[0]
+            abstract val probabilities // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.probabilities|{}probabilities[0]
+                abstract fun <get-probabilities>(): kotlin.collections/Map<org.jraf.klibjev.model/Question.Choice.Option, kotlin/Double> // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.probabilities.<get-probabilities>|<get-probabilities>(){}[0]
         }
 
-        abstract interface Noul : org.jraf.klibjev.model/Answers.Answer { // org.jraf.klibjev.model/Answers.Answer.Noul|null[0]
-            abstract val value // org.jraf.klibjev.model/Answers.Answer.Noul.value|{}value[0]
-                abstract fun <get-value>(): kotlin/Double // org.jraf.klibjev.model/Answers.Answer.Noul.value.<get-value>|<get-value>(){}[0]
+        abstract interface Noul : org.jraf.klibjev.model/EvaluateResponse.Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer.Noul|null[0]
+            abstract val value // org.jraf.klibjev.model/EvaluateResponse.Answer.Noul.value|{}value[0]
+                abstract fun <get-value>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Noul.value.<get-value>|<get-value>(){}[0]
         }
 
-        abstract interface Score : org.jraf.klibjev.model/Answers.Answer { // org.jraf.klibjev.model/Answers.Answer.Score|null[0]
-            abstract val confidence // org.jraf.klibjev.model/Answers.Answer.Score.confidence|{}confidence[0]
-                abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/Answers.Answer.Score.confidence.<get-confidence>|<get-confidence>(){}[0]
-            abstract val probabilities // org.jraf.klibjev.model/Answers.Answer.Score.probabilities|{}probabilities[0]
-                abstract fun <get-probabilities>(): kotlin.collections/Map<org.jraf.klibjev.model/Question.Score.Level, kotlin/Double> // org.jraf.klibjev.model/Answers.Answer.Score.probabilities.<get-probabilities>|<get-probabilities>(){}[0]
-            abstract val value // org.jraf.klibjev.model/Answers.Answer.Score.value|{}value[0]
-                abstract fun <get-value>(): kotlin/Double // org.jraf.klibjev.model/Answers.Answer.Score.value.<get-value>|<get-value>(){}[0]
+        abstract interface Score : org.jraf.klibjev.model/EvaluateResponse.Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer.Score|null[0]
+            abstract val confidence // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.confidence|{}confidence[0]
+                abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.confidence.<get-confidence>|<get-confidence>(){}[0]
+            abstract val probabilities // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.probabilities|{}probabilities[0]
+                abstract fun <get-probabilities>(): kotlin.collections/Map<org.jraf.klibjev.model/Question.Score.Level, kotlin/Double> // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.probabilities.<get-probabilities>|<get-probabilities>(){}[0]
+            abstract val value // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.value|{}value[0]
+                abstract fun <get-value>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.value.<get-value>|<get-value>(){}[0]
         }
     }
 }
@@ -277,4 +288,4 @@ final fun org.jraf.klibjev.model/Score(kotlin/String, kotlin.collections/List<ko
 final fun org.jraf.klibjev.model/Score(kotlin/String, kotlin/Array<out kotlin/String>...): org.jraf.klibjev.model/Question.Score // org.jraf.klibjev.model/Score|Score(kotlin.String;kotlin.Array<out|kotlin.String>...){}[0]
 final fun org.jraf.klibjev.model/State(kotlin.collections/List<kotlin/String>): org.jraf.klibjev.model/State // org.jraf.klibjev.model/State|State(kotlin.collections.List<kotlin.String>){}[0]
 final fun org.jraf.klibjev.model/State(kotlin/String): org.jraf.klibjev.model/State // org.jraf.klibjev.model/State|State(kotlin.String){}[0]
-final suspend fun (org.jraf.klibjev.client/JevClient).org.jraf.klibjev.client/evaluate(org.jraf.klibjev.model/State, kotlin/Array<out org.jraf.klibjev.model/Question>...): kotlin/Result<org.jraf.klibjev.model/Answers> // org.jraf.klibjev.client/evaluate|evaluate@org.jraf.klibjev.client.JevClient(org.jraf.klibjev.model.State;kotlin.Array<out|org.jraf.klibjev.model.Question>...){}[0]
+final suspend fun (org.jraf.klibjev.client/JevClient).org.jraf.klibjev.client/evaluate(org.jraf.klibjev.model/State, kotlin/Array<out org.jraf.klibjev.model/Question>...): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/evaluate|evaluate@org.jraf.klibjev.client.JevClient(org.jraf.klibjev.model.State;kotlin.Array<out|org.jraf.klibjev.model.Question>...){}[0]

@@ -25,11 +25,10 @@
 
 package org.jraf.klibjev.model
 
-interface Answers {
+interface EvaluateResponse {
+  val model: String
   val answers: Map<Question, Answer>
-
-  // TODO
-  // val usage: Usage
+  val usage: Usage
 
   sealed interface Answer {
     interface Noul : Answer {
@@ -50,5 +49,10 @@ interface Answers {
       val probabilities: Map<Question.Score.Level, Double>
       val confidence: Double
     }
+  }
+
+  interface Usage {
+    val inputTokens: Int
+    val outputTokens: Int
   }
 }

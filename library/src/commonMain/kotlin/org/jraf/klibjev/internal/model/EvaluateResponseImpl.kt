@@ -25,21 +25,30 @@
 
 package org.jraf.klibjev.internal.model
 
-import org.jraf.klibjev.model.Answers
+import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 
-internal data class AnswersImpl(override val answers: Map<Question, Answers.Answer>) : Answers
+internal data class EvaluateResponseImpl(
+  override val model: String,
+  override val answers: Map<Question, EvaluateResponse.Answer>,
+  override val usage: EvaluateResponse.Usage,
+) : EvaluateResponse
 
-internal data class NoulImpl(override val value: Double) : Answers.Answer.Noul
+internal data class NoulImpl(override val value: Double) : EvaluateResponse.Answer.Noul
 
 internal data class ChoiceImpl(
   override val highestProbability: Question.Choice.Option,
   override val probabilities: Map<Question.Choice.Option, Double>,
   override val confidence: Double,
-) : Answers.Answer.Choice
+) : EvaluateResponse.Answer.Choice
 
 internal data class ScoreImpl(
   override val value: Double,
   override val probabilities: Map<Question.Score.Level, Double>,
   override val confidence: Double,
-) : Answers.Answer.Score
+) : EvaluateResponse.Answer.Score
+
+internal data class UsageImpl(
+  override val inputTokens: Int,
+  override val outputTokens: Int,
+) : EvaluateResponse.Usage

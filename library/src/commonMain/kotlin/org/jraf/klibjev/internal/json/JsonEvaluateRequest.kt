@@ -23,6 +23,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("PropertyName", "unused")
+
 package org.jraf.klibjev.internal.json
 
 import kotlinx.serialization.SerialName
@@ -58,8 +60,7 @@ internal sealed interface JsonQuestion {
   class Choice(
     override val instructions: JsonElement,
     val criteria: Map<String, String?>,
-  ) : JsonQuestion {
-  }
+  ) : JsonQuestion
 
   @Serializable
   @SerialName("score")

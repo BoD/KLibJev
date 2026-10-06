@@ -51,11 +51,12 @@ import org.jraf.klibjev.internal.json.JsonAnswer
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
 import org.jraf.klibjev.internal.json.JsonEvaluateResponse
 import org.jraf.klibjev.internal.json.JsonQuestion
-import org.jraf.klibjev.internal.model.AnswersImpl
 import org.jraf.klibjev.internal.model.ChoiceImpl
+import org.jraf.klibjev.internal.model.EvaluateResponseImpl
 import org.jraf.klibjev.internal.model.NoulImpl
 import org.jraf.klibjev.internal.model.ScoreImpl
-import org.jraf.klibjev.model.Answers
+import org.jraf.klibjev.internal.model.UsageImpl
+import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
 import org.jraf.klibnanolog.logd
@@ -131,7 +132,7 @@ internal class JevClientImpl(
   override suspend fun evaluate(
     state: State,
     questions: Set<Question>,
-  ): Result<Answers> {
+  ): Result<EvaluateResponse> {
     val questionIds: Map<String, Question> = questions.toList().mapIndexed { index, question -> "q$index" to question }.toMap()
     val jsonEvaluateRequest = JsonEvaluateRequest(
       model = configuration.model,
@@ -139,7 +140,7 @@ internal class JevClientImpl(
       questions = questions.toJsonQuestionsMap(questionIds),
     )
     return runCatching {
-      service.evaluate(jsonEvaluateRequest).toAnswers(questionIds)
+      service.evaluate(jsonEvaluateRequest).toEvaluateResponse(questionIds)
     }
   }
 }
@@ -209,16 +210,21 @@ private fun Question.Score.Level.toJsonElement(): JsonElement {
   }
 }
 
-private fun JsonEvaluateResponse.toAnswers(questionIds: Map<String, Question>): Answers {
-  return AnswersImpl(
+private fun JsonEvaluateResponse.toEvaluateResponse(questionIds: Map<String, Question>): EvaluateResponse {
+  return EvaluateResponseImpl(
+    model = this.model,
     answers = this.answers.map { (questionId, answer) ->
       val question = questionIds[questionId]
       (question ?: error("Unknown question ID: $questionId")) to answer.toAnswer(question)
     }.toMap(),
+    usage = UsageImpl(
+      inputTokens = this.usage.input_tokens,
+      outputTokens = this.usage.output_tokens,
+    ),
   )
 }
 
-private fun JsonAnswer.toAnswer(question: Question): Answers.Answer {
+private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
   return when (this) {
     is JsonAnswer.Noul -> NoulImpl(
       value = this.noul,

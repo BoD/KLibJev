@@ -23,6 +23,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("PropertyName", "unused")
+
 package org.jraf.klibjev.internal.json
 
 import kotlinx.serialization.SerialName
@@ -33,9 +35,7 @@ import kotlinx.serialization.json.JsonElement
 internal class JsonEvaluateResponse(
   val model: String,
   val answers: Map<String, JsonAnswer>,
-
-  // TODO usage
-  //val usage: JsonUsage,
+  val usage: JsonUsage,
 )
 
 @Serializable
@@ -64,3 +64,9 @@ internal sealed interface JsonAnswer {
     val confidence: Double,
   ) : JsonAnswer
 }
+
+@Serializable
+internal class JsonUsage(
+  val input_tokens: Int,
+  val output_tokens: Int,
+)

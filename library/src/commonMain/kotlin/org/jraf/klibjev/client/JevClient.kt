@@ -26,7 +26,7 @@
 package org.jraf.klibjev.client
 
 import org.jraf.klibjev.internal.client.JevClientImpl
-import org.jraf.klibjev.model.Answers
+import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
 
@@ -62,7 +62,7 @@ interface JevClient : AutoCloseable {
   suspend fun evaluate(
     state: State,
     questions: Set<Question>,
-  ): Result<Answers>
+  ): Result<EvaluateResponse>
 }
 
 fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl(configuration)
@@ -70,4 +70,4 @@ fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl
 suspend fun JevClient.evaluate(
   state: State,
   vararg questions: Question,
-): Result<Answers> = evaluate(state, questions.toSet())
+): Result<EvaluateResponse> = evaluate(state, questions.toSet())

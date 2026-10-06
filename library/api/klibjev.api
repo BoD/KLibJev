@@ -45,27 +45,34 @@ public final class org/jraf/klibjev/client/JevClientKt {
 	public static final fun evaluate (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;[Lorg/jraf/klibjev/model/Question;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public abstract interface class org/jraf/klibjev/model/Answers {
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse {
 	public abstract fun getAnswers ()Ljava/util/Map;
+	public abstract fun getModel ()Ljava/lang/String;
+	public abstract fun getUsage ()Lorg/jraf/klibjev/model/EvaluateResponse$Usage;
 }
 
-public abstract interface class org/jraf/klibjev/model/Answers$Answer {
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer {
 }
 
-public abstract interface class org/jraf/klibjev/model/Answers$Answer$Choice : org/jraf/klibjev/model/Answers$Answer {
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer$Choice : org/jraf/klibjev/model/EvaluateResponse$Answer {
 	public abstract fun getConfidence ()D
 	public abstract fun getHighestProbability ()Lorg/jraf/klibjev/model/Question$Choice$Option;
 	public abstract fun getProbabilities ()Ljava/util/Map;
 }
 
-public abstract interface class org/jraf/klibjev/model/Answers$Answer$Noul : org/jraf/klibjev/model/Answers$Answer {
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer$Noul : org/jraf/klibjev/model/EvaluateResponse$Answer {
 	public abstract fun getValue ()D
 }
 
-public abstract interface class org/jraf/klibjev/model/Answers$Answer$Score : org/jraf/klibjev/model/Answers$Answer {
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer$Score : org/jraf/klibjev/model/EvaluateResponse$Answer {
 	public abstract fun getConfidence ()D
 	public abstract fun getProbabilities ()Ljava/util/Map;
 	public abstract fun getValue ()D
+}
+
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Usage {
+	public abstract fun getInputTokens ()I
+	public abstract fun getOutputTokens ()I
 }
 
 public abstract interface class org/jraf/klibjev/model/Question {
