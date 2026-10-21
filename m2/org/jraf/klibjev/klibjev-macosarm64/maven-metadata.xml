@@ -3,10 +3,10 @@
   <groupId>org.jraf.klibjev</groupId>
   <artifactId>klibjev-macosarm64</artifactId>
   <versioning>
-    <latest>1.1.0-SNAPSHOT</latest>
+    <latest>1.1.1-SNAPSHOT</latest>
     <versions>
-      <version>1.1.0-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20261021164448</lastUpdated>
+    <lastUpdated>20261021170001</lastUpdated>
   </versioning>
 </metadata>
