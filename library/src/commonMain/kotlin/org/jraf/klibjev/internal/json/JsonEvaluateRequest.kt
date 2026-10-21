@@ -69,6 +69,13 @@ internal sealed interface JsonQuestion {
     override val instructions: JsonElement,
     val criteria: List<JsonElement>,
   ) : JsonQuestion
+
+  @Serializable
+  @SerialName("box")
+  class Box(
+    override val instructions: JsonElement,
+  ) : JsonQuestion
+
 }
 
 @Serializable

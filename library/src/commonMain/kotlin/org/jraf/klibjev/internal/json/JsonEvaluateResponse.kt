@@ -30,6 +30,7 @@ package org.jraf.klibjev.internal.json
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+import org.jraf.klibjev.internal.json.JsonAnswer.Box
 
 @Serializable
 internal class JsonEvaluateResponse(
@@ -63,6 +64,21 @@ internal sealed interface JsonAnswer {
     val probabilities: Map<String, Double>,
     val confidence: Double,
   ) : JsonAnswer
+
+  @Serializable
+  @SerialName("box")
+  class Box(
+    val box: Box.Box,
+    val confidence: Double,
+  ) : JsonAnswer {
+    @Serializable
+    class Box(
+      val top: Double,
+      val bottom: Double,
+      val left: Double,
+      val right: Double,
+    )
+  }
 }
 
 @Serializable

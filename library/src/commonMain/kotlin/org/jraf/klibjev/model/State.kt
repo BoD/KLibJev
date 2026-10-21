@@ -26,6 +26,7 @@
 package org.jraf.klibjev.model
 
 import dev.drewhamilton.poko.Poko
+import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
 sealed interface State {
@@ -37,7 +38,7 @@ sealed interface State {
   value class StringList(val value: List<kotlin.String>) : State
 
   /**
-   * [T] must be marked [kotlinx.serialization.Serializable].
+   * [T] must be [Serializable].
    */
   @Poko
   class Object<T : Any>(val value: T) : State
@@ -47,6 +48,6 @@ fun State(value: String): State = State.String(value)
 fun State(value: List<String>): State = State.StringList(value)
 
 /**
- * [T] must be marked [kotlinx.serialization.Serializable].
+ * [T] must be [Serializable].
  */
 fun <T : Any> State(value: T): State = State.Object(value)

@@ -53,6 +53,7 @@ import org.jraf.klibjev.internal.json.JsonAsset
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
 import org.jraf.klibjev.internal.json.JsonEvaluateResponse
 import org.jraf.klibjev.internal.json.JsonQuestion
+import org.jraf.klibjev.internal.model.BoxImpl
 import org.jraf.klibjev.internal.model.ChoiceImpl
 import org.jraf.klibjev.internal.model.EvaluateResponseImpl
 import org.jraf.klibjev.internal.model.NoulImpl
@@ -188,6 +189,10 @@ private fun Set<Question>.toJsonQuestionsMap(questionsById: Map<String, Question
         instructions = question.instructions.toJsonInstructions(),
         criteria = question.levels.map { it.toJsonElement() },
       )
+
+      is Question.Box -> JsonQuestion.Box(
+        instructions = question.instructions.toJsonInstructions(),
+      )
     }
   }
 }
@@ -268,6 +273,14 @@ private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
         }
         level to probability
       }.toMap(),
+      confidence = this.confidence,
+    )
+
+    is JsonAnswer.Box -> BoxImpl(
+      top = this.box.top,
+      bottom = this.box.bottom,
+      left = this.box.left,
+      right = this.box.right,
       confidence = this.confidence,
     )
   }

@@ -26,9 +26,12 @@
 package org.jraf.klibjev.model
 
 import dev.drewhamilton.poko.Poko
+import kotlinx.serialization.Serializable
+import org.jraf.klibjev.model.Question.Box
 import org.jraf.klibjev.model.Question.Choice
 import org.jraf.klibjev.model.Question.Instructions
 import org.jraf.klibjev.model.Question.Noul
+import org.jraf.klibjev.model.Question.Score
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmName
 
@@ -85,12 +88,17 @@ sealed interface Question {
       value class String(val value: kotlin.String) : Level
 
       /**
-       * [T] must be marked [kotlinx.serialization.Serializable].
+       * [T] must be [Serializable].
        */
       @Poko
       class Object<T : Any>(val value: T) : Level
     }
   }
+
+  @Poko
+  class Box(
+    override val instructions: Instructions,
+  ) : Question
 
   sealed interface Instructions {
     @JvmInline
@@ -101,7 +109,7 @@ sealed interface Question {
     value class StringList(val value: List<kotlin.String>) : Instructions
 
     /**
-     * [T] must be marked [kotlinx.serialization.Serializable].
+     * [T] must be [Serializable].
      */
     @Poko
     class Object<T : Any>(val value: T) : Instructions
@@ -114,7 +122,7 @@ fun Noul(instructions: String, criteria: Noul.Criteria? = null): Noul = Noul(Ins
 fun Noul(instructions: List<String>, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.StringList(instructions), criteria)
 
 /**
- * [T] must be marked [kotlinx.serialization.Serializable].
+ * [T] must be [Serializable].
  */
 fun <T : Any> Noul(instructions: T, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.Object(instructions), criteria)
 
@@ -125,7 +133,7 @@ fun Choice(instructions: String, options: Set<Choice.Option>): Choice = Choice(I
 fun Choice(instructions: List<String>, options: Set<Choice.Option>): Choice = Choice(Instructions.StringList(instructions), options)
 
 /**
- * [T] must be marked [kotlinx.serialization.Serializable].
+ * [T] must be [Serializable].
  */
 fun <T : Any> Choice(instructions: T, options: Set<Choice.Option>): Choice = Choice(Instructions.Object(instructions), options)
 
@@ -134,75 +142,86 @@ fun Choice(instructions: List<String>, vararg options: Choice.Option): Choice =
   Choice(Instructions.StringList(instructions), options.toSet())
 
 /**
- * [T] must be marked [kotlinx.serialization.Serializable].
+ * [T] must be [Serializable].
  */
 fun <T : Any> Choice(instructions: T, vararg options: Choice.Option): Choice = Choice(Instructions.Object(instructions), options.toSet())
 
 
 // Score (Strings)
 
-fun Score(instructions: String, levels: List<String>): Question.Score =
-  Question.Score(Instructions.String(instructions), levels.map { Question.Score.Level.String(it) })
+fun Score(instructions: String, levels: List<String>): Score =
+  Score(Instructions.String(instructions), levels.map { Score.Level.String(it) })
 
-fun Score(instructions: List<String>, levels: List<String>): Question.Score =
-  Question.Score(Instructions.StringList(instructions), levels.map { Question.Score.Level.String(it) })
-
-/**
- * [T] must be marked [kotlinx.serialization.Serializable].
- */
-fun <T : Any> Score(instructions: T, levels: List<String>): Question.Score =
-  Question.Score(Instructions.Object(instructions), levels.map { Question.Score.Level.String(it) })
-
-fun Score(instructions: String, vararg levels: String): Question.Score =
-  Question.Score(Instructions.String(instructions), levels.map { Question.Score.Level.String(it) })
-
-fun Score(instructions: List<String>, vararg levels: String): Question.Score =
-  Question.Score(Instructions.StringList(instructions), levels.map { Question.Score.Level.String(it) })
+fun Score(instructions: List<String>, levels: List<String>): Score =
+  Score(Instructions.StringList(instructions), levels.map { Score.Level.String(it) })
 
 /**
- * [T] must be marked [kotlinx.serialization.Serializable].
+ * [T] must be [Serializable].
  */
-fun <T : Any> Score(instructions: T, vararg levels: String): Question.Score =
-  Question.Score(Instructions.Object(instructions), levels.map { Question.Score.Level.String(it) })
+fun <T : Any> Score(instructions: T, levels: List<String>): Score =
+  Score(Instructions.Object(instructions), levels.map { Score.Level.String(it) })
+
+fun Score(instructions: String, vararg levels: String): Score =
+  Score(Instructions.String(instructions), levels.map { Score.Level.String(it) })
+
+fun Score(instructions: List<String>, vararg levels: String): Score =
+  Score(Instructions.StringList(instructions), levels.map { Score.Level.String(it) })
+
+/**
+ * [T] must be [Serializable].
+ */
+fun <T : Any> Score(instructions: T, vararg levels: String): Score =
+  Score(Instructions.Object(instructions), levels.map { Score.Level.String(it) })
 
 
 // Score (Objects)
 
 /**
- * [L] must be marked [kotlinx.serialization.Serializable].
+ * [L] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <L : Any> Score(instructions: String, levels: List<L>): Question.Score =
-  Question.Score(Instructions.String(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <L : Any> Score(instructions: String, levels: List<L>): Score =
+  Score(Instructions.String(instructions), levels.map { Score.Level.Object(it) })
 
 /**
- * [L] must be marked [kotlinx.serialization.Serializable].
+ * [L] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <L : Any> Score(instructions: List<String>, levels: List<L>): Question.Score =
-  Question.Score(Instructions.StringList(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <L : Any> Score(instructions: List<String>, levels: List<L>): Score =
+  Score(Instructions.StringList(instructions), levels.map { Score.Level.Object(it) })
 
 /**
- * [L] and [T] must be marked [kotlinx.serialization.Serializable].
+ * [L] and [T] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <T : Any, L : Any> Score(instructions: T, levels: List<L>): Question.Score =
-  Question.Score(Instructions.Object(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <T : Any, L : Any> Score(instructions: T, levels: List<L>): Score =
+  Score(Instructions.Object(instructions), levels.map { Score.Level.Object(it) })
 
 /**
- * [L] must be marked [kotlinx.serialization.Serializable].
+ * [L] must be [Serializable].
  */
-fun <L : Any> Score(instructions: String, vararg levels: L): Question.Score =
-  Question.Score(Instructions.String(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <L : Any> Score(instructions: String, vararg levels: L): Score =
+  Score(Instructions.String(instructions), levels.map { Score.Level.Object(it) })
 
 /**
- * [L] must be marked [kotlinx.serialization.Serializable].
+ * [L] must be [Serializable].
  */
-fun <L : Any> Score(instructions: List<String>, vararg levels: L): Question.Score =
-  Question.Score(Instructions.StringList(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <L : Any> Score(instructions: List<String>, vararg levels: L): Score =
+  Score(Instructions.StringList(instructions), levels.map { Score.Level.Object(it) })
 
 /**
- * [L] and [T] must be marked [kotlinx.serialization.Serializable].
+ * [L] and [T] must be [Serializable].
  */
-fun <T : Any, L : Any> Score(instructions: T, vararg levels: L): Question.Score =
-  Question.Score(Instructions.Object(instructions), levels.map { Question.Score.Level.Object(it) })
+fun <T : Any, L : Any> Score(instructions: T, vararg levels: L): Score =
+  Score(Instructions.Object(instructions), levels.map { Score.Level.Object(it) })
+
+
+// Box
+
+fun Box(instructions: String): Box = Box(Instructions.String(instructions))
+fun Box(instructions: List<String>): Box = Box(Instructions.StringList(instructions))
+
+/**
+ * [T] must be [Serializable].
+ */
+fun <T : Any> Box(instructions: T): Box = Box(Instructions.Object(instructions))

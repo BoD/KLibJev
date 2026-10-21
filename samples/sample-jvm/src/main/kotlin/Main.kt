@@ -32,7 +32,9 @@ import org.jraf.klibjev.client.JevClient.Configuration.Http
 import org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel
 import org.jraf.klibjev.client.evaluate
 import org.jraf.klibjev.model.Asset
+import org.jraf.klibjev.model.Box
 import org.jraf.klibjev.model.Choice
+import org.jraf.klibjev.model.EvaluateResponse.Answer
 import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question.Choice.Option
 import org.jraf.klibjev.model.Score
@@ -48,6 +50,7 @@ suspend fun main(av: Array<String>) {
 //        proxy = Http.Proxy("localhost", 8888),
 //        bypassSslChecks = true,
       ),
+      model = "jev-preview",
     ),
   ).use { jevClient ->
     val answers1 = jevClient.evaluate(
@@ -93,6 +96,23 @@ suspend fun main(av: Array<String>) {
       ),
     ).getOrThrow()
     println("Answers 2: $answers2")
+
+    val answers3 = jevClient.evaluate(
+      state = State("`image1`"),
+      assets = setOf(
+        Asset.Image(
+          id = "image1",
+          source = File("samples/sample-jvm/assets/strawberry-raspberry.png").inputStream().asSource().buffered(),
+        ),
+      ),
+      Box(
+        instructions = "Raspberry",
+      ),
+    ).getOrThrow()
+    val boxAnswer = answers3.answers.values.firstOrNull() as Answer.Box
+    val imageWidth = 1568
+    val imageHeight = 887
+    println("Answers 3: top=${boxAnswer.top * imageHeight}, bottom=${boxAnswer.bottom * imageHeight}, left=${boxAnswer.left * imageWidth}, right=${boxAnswer.right * imageWidth}")
   }
 }
 
