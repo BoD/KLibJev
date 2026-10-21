@@ -21,17 +21,14 @@ kotlin {
         implementation(libs.ktor.client.logging)
         implementation(libs.ktor.serialization.kotlinx.json)
 
-        // Okio
-        implementation(libs.okio)
-
-        // Date time
-        implementation(libs.kotlinx.datetime)
-
         // Serialization
         implementation(libs.kotlinx.serialization.json)
 
         // Logging
         implementation(libs.klibnanolog)
+
+        // Kotlinx IO
+        api(libs.kotlinx.io)
       }
     }
 
@@ -62,8 +59,8 @@ kotlin {
 
     macosArm64Main {
       dependencies {
-        // Ktor CIO
-        implementation(libs.ktor.client.darwin)
+        // Ktor curl
+        implementation(libs.ktor.client.curl)
       }
     }
   }
