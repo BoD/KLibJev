@@ -1,0 +1,176 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.jraf.klibjev",
+    "module": "klibjev",
+    "version": "1.1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-io-core",
+          "version": {
+            "requires": "0.9.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "klibjev-metadata-1.1.0-SNAPSHOT.jar",
+          "url": "klibjev-1.1.0-SNAPSHOT.jar",
+          "size": 13365,
+          "sha512": "d6cb703499e6ad1b8222cef7be9e73fef34b18a4c45e5664b8f41d76fd74e7bef38ddf0aae682f7719ed8aca822895e10063e16606e14b507f7d8950cd73c4e5",
+          "sha256": "01c4a988923986c82c59f7c5c6b25e986d772cfa76a9fadc05abd16daaa865f8",
+          "sha1": "cb92f06a8e5f59006e203e5177a4c7666ce0f9dd",
+          "md5": "48c648edfef1a79297526831ae94d283"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "klibjev-kotlin-1.1.0-SNAPSHOT-sources.jar",
+          "url": "klibjev-1.1.0-SNAPSHOT-sources.jar",
+          "size": 15260,
+          "sha512": "48b276c07979fe3db4f85e4d76f943634f103064972268c6d02ee835fb9dbb004f4b3fc5a0ba833157f42310b927d61b027031b066813004eb8c0620e5d5d9d2",
+          "sha256": "574b636252554aaeded9d5b581379f8c80becf2aa84dc0ab21a2eb2764060ac8",
+          "sha1": "382c02bdd4b3c5d820f66a7ae961c03471cbe642",
+          "md5": "bcc13ce891134d305bd94df7de4fad72"
+        }
+      ]
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../klibjev-jvm/1.1.0-SNAPSHOT/klibjev-jvm-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-jvm",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../klibjev-jvm/1.1.0-SNAPSHOT/klibjev-jvm-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-jvm",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../klibjev-jvm/1.1.0-SNAPSHOT/klibjev-jvm-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-jvm",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    },
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../klibjev-macosarm64/1.1.0-SNAPSHOT/klibjev-macosarm64-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-macosarm64",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    },
+    {
+      "name": "macosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../klibjev-macosarm64/1.1.0-SNAPSHOT/klibjev-macosarm64-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-macosarm64",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../klibjev-macosarm64/1.1.0-SNAPSHOT/klibjev-macosarm64-1.1.0-SNAPSHOT.module",
+        "group": "org.jraf.klibjev",
+        "module": "klibjev-macosarm64",
+        "version": "1.1.0-SNAPSHOT"
+      }
+    }
+  ]
+}
