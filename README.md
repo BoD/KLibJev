@@ -5,6 +5,8 @@ A [Jev](https://docs.typesafe.ai/introduction) API client library for Kotlin.
 KLibJev is a Kotlin Multiplatform client for accessing the Jev API. It handles authentication and supports evaluating text or structured
 data with yes/no (`Noul`), multiple-choice (`Choice`), and scoring (`Score`) questions, and receive typed answers with probabilities.
 
+Since v1.1.0, images and `Box` questions are also supported.
+
 ## Usage
 
 Add the library to your Kotlin project:
