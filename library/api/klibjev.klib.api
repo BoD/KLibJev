@@ -7,7 +7,7 @@
 
 // Library unique name: <org.jraf.klibjev:klibjev>
 abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { // org.jraf.klibjev.client/JevClient|null[0]
-    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Question>): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Question>){}[0]
+    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Question>, kotlin.collections/Set<org.jraf.klibjev.model/Asset> = ...): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Question>;kotlin.collections.Set<org.jraf.klibjev.model.Asset>){}[0]
 
     final class Configuration { // org.jraf.klibjev.client/JevClient.Configuration|null[0]
         constructor <init>(kotlin/String, kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http = ...) // org.jraf.klibjev.client/JevClient.Configuration.<init>|<init>(kotlin.String;kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http){}[0]
@@ -20,8 +20,10 @@ abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { //
             final fun <get-model>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.model.<get-model>|<get-model>(){}[0]
 
         final class Http { // org.jraf.klibjev.client/JevClient.Configuration.Http|null[0]
-            constructor <init>(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ...) // org.jraf.klibjev.client/JevClient.Configuration.Http.<init>|<init>(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?){}[0]
+            constructor <init>(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ..., kotlin/Boolean = ...) // org.jraf.klibjev.client/JevClient.Configuration.Http.<init>|<init>(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?;kotlin.Boolean){}[0]
 
+            final val bypassSslChecks // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks|{}bypassSslChecks[0]
+                final fun <get-bypassSslChecks>(): kotlin/Boolean // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks.<get-bypassSslChecks>|<get-bypassSslChecks>(){}[0]
             final val loggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel|{}loggingLevel[0]
                 final fun <get-loggingLevel>(): org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel.<get-loggingLevel>|<get-loggingLevel>(){}[0]
             final val proxy // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy|{}proxy[0]
@@ -71,6 +73,19 @@ abstract interface org.jraf.klibjev.model/EvaluateResponse { // org.jraf.klibjev
     }
 
     sealed interface Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer|null[0]
+        abstract interface Box : org.jraf.klibjev.model/EvaluateResponse.Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer.Box|null[0]
+            abstract val bottom // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.bottom|{}bottom[0]
+                abstract fun <get-bottom>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.bottom.<get-bottom>|<get-bottom>(){}[0]
+            abstract val confidence // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.confidence|{}confidence[0]
+                abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.confidence.<get-confidence>|<get-confidence>(){}[0]
+            abstract val left // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.left|{}left[0]
+                abstract fun <get-left>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.left.<get-left>|<get-left>(){}[0]
+            abstract val right // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.right|{}right[0]
+                abstract fun <get-right>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.right.<get-right>|<get-right>(){}[0]
+            abstract val top // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.top|{}top[0]
+                abstract fun <get-top>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Box.top.<get-top>|<get-top>(){}[0]
+        }
+
         abstract interface Choice : org.jraf.klibjev.model/EvaluateResponse.Answer { // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice|null[0]
             abstract val confidence // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.confidence|{}confidence[0]
                 abstract fun <get-confidence>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Choice.confidence.<get-confidence>|<get-confidence>(){}[0]
@@ -93,6 +108,26 @@ abstract interface org.jraf.klibjev.model/EvaluateResponse { // org.jraf.klibjev
             abstract val value // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.value|{}value[0]
                 abstract fun <get-value>(): kotlin/Double // org.jraf.klibjev.model/EvaluateResponse.Answer.Score.value.<get-value>|<get-value>(){}[0]
         }
+    }
+}
+
+sealed interface org.jraf.klibjev.model/Asset { // org.jraf.klibjev.model/Asset|null[0]
+    abstract val id // org.jraf.klibjev.model/Asset.id|{}id[0]
+        abstract fun <get-id>(): kotlin/String // org.jraf.klibjev.model/Asset.id.<get-id>|<get-id>(){}[0]
+    abstract val source // org.jraf.klibjev.model/Asset.source|{}source[0]
+        abstract fun <get-source>(): kotlinx.io/Source // org.jraf.klibjev.model/Asset.source.<get-source>|<get-source>(){}[0]
+
+    final class Image : org.jraf.klibjev.model/Asset { // org.jraf.klibjev.model/Asset.Image|null[0]
+        constructor <init>(kotlin/String, kotlinx.io/Source) // org.jraf.klibjev.model/Asset.Image.<init>|<init>(kotlin.String;kotlinx.io.Source){}[0]
+
+        final val id // org.jraf.klibjev.model/Asset.Image.id|{}id[0]
+            final fun <get-id>(): kotlin/String // org.jraf.klibjev.model/Asset.Image.id.<get-id>|<get-id>(){}[0]
+        final val source // org.jraf.klibjev.model/Asset.Image.source|{}source[0]
+            final fun <get-source>(): kotlinx.io/Source // org.jraf.klibjev.model/Asset.Image.source.<get-source>|<get-source>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // org.jraf.klibjev.model/Asset.Image.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // org.jraf.klibjev.model/Asset.Image.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // org.jraf.klibjev.model/Asset.Image.toString|toString(){}[0]
     }
 }
 
@@ -133,6 +168,17 @@ sealed interface org.jraf.klibjev.model/Question { // org.jraf.klibjev.model/Que
             final fun hashCode(): kotlin/Int // org.jraf.klibjev.model/Question.Instructions.StringList.hashCode|hashCode(){}[0]
             final fun toString(): kotlin/String // org.jraf.klibjev.model/Question.Instructions.StringList.toString|toString(){}[0]
         }
+    }
+
+    final class Box : org.jraf.klibjev.model/Question { // org.jraf.klibjev.model/Question.Box|null[0]
+        constructor <init>(org.jraf.klibjev.model/Question.Instructions) // org.jraf.klibjev.model/Question.Box.<init>|<init>(org.jraf.klibjev.model.Question.Instructions){}[0]
+
+        final val instructions // org.jraf.klibjev.model/Question.Box.instructions|{}instructions[0]
+            final fun <get-instructions>(): org.jraf.klibjev.model/Question.Instructions // org.jraf.klibjev.model/Question.Box.instructions.<get-instructions>|<get-instructions>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // org.jraf.klibjev.model/Question.Box.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // org.jraf.klibjev.model/Question.Box.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // org.jraf.klibjev.model/Question.Box.toString|toString(){}[0]
     }
 
     final class Choice : org.jraf.klibjev.model/Question { // org.jraf.klibjev.model/Question.Choice|null[0]
@@ -265,6 +311,7 @@ final val org.jraf.klibjev/VERSION // org.jraf.klibjev/VERSION|{}VERSION[0]
 
 final fun <#A: kotlin/Any, #B: kotlin/Any> org.jraf.klibjev.model/Score(#A, kotlin.collections/List<#B>): org.jraf.klibjev.model/Question.Score // org.jraf.klibjev.model/Score|Score(0:0;kotlin.collections.List<0:1>){0§<kotlin.Any>;1§<kotlin.Any>}[0]
 final fun <#A: kotlin/Any, #B: kotlin/Any> org.jraf.klibjev.model/Score(#A, kotlin/Array<out #B>...): org.jraf.klibjev.model/Question.Score // org.jraf.klibjev.model/Score|Score(0:0;kotlin.Array<out|0:1>...){0§<kotlin.Any>;1§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> org.jraf.klibjev.model/Box(#A): org.jraf.klibjev.model/Question.Box // org.jraf.klibjev.model/Box|Box(0:0){0§<kotlin.Any>}[0]
 final fun <#A: kotlin/Any> org.jraf.klibjev.model/Choice(#A, kotlin.collections/Set<org.jraf.klibjev.model/Question.Choice.Option>): org.jraf.klibjev.model/Question.Choice // org.jraf.klibjev.model/Choice|Choice(0:0;kotlin.collections.Set<org.jraf.klibjev.model.Question.Choice.Option>){0§<kotlin.Any>}[0]
 final fun <#A: kotlin/Any> org.jraf.klibjev.model/Choice(#A, kotlin/Array<out org.jraf.klibjev.model/Question.Choice.Option>...): org.jraf.klibjev.model/Question.Choice // org.jraf.klibjev.model/Choice|Choice(0:0;kotlin.Array<out|org.jraf.klibjev.model.Question.Choice.Option>...){0§<kotlin.Any>}[0]
 final fun <#A: kotlin/Any> org.jraf.klibjev.model/Noul(#A, org.jraf.klibjev.model/Question.Noul.Criteria? = ...): org.jraf.klibjev.model/Question.Noul // org.jraf.klibjev.model/Noul|Noul(0:0;org.jraf.klibjev.model.Question.Noul.Criteria?){0§<kotlin.Any>}[0]
@@ -276,6 +323,8 @@ final fun <#A: kotlin/Any> org.jraf.klibjev.model/Score(kotlin/String, kotlin.co
 final fun <#A: kotlin/Any> org.jraf.klibjev.model/Score(kotlin/String, kotlin/Array<out #A>...): org.jraf.klibjev.model/Question.Score // org.jraf.klibjev.model/Score|Score(kotlin.String;kotlin.Array<out|0:0>...){0§<kotlin.Any>}[0]
 final fun <#A: kotlin/Any> org.jraf.klibjev.model/State(#A): org.jraf.klibjev.model/State // org.jraf.klibjev.model/State|State(0:0){0§<kotlin.Any>}[0]
 final fun org.jraf.klibjev.client/JevClient(org.jraf.klibjev.client/JevClient.Configuration): org.jraf.klibjev.client/JevClient // org.jraf.klibjev.client/JevClient|JevClient(org.jraf.klibjev.client.JevClient.Configuration){}[0]
+final fun org.jraf.klibjev.model/Box(kotlin.collections/List<kotlin/String>): org.jraf.klibjev.model/Question.Box // org.jraf.klibjev.model/Box|Box(kotlin.collections.List<kotlin.String>){}[0]
+final fun org.jraf.klibjev.model/Box(kotlin/String): org.jraf.klibjev.model/Question.Box // org.jraf.klibjev.model/Box|Box(kotlin.String){}[0]
 final fun org.jraf.klibjev.model/Choice(kotlin.collections/List<kotlin/String>, kotlin.collections/Set<org.jraf.klibjev.model/Question.Choice.Option>): org.jraf.klibjev.model/Question.Choice // org.jraf.klibjev.model/Choice|Choice(kotlin.collections.List<kotlin.String>;kotlin.collections.Set<org.jraf.klibjev.model.Question.Choice.Option>){}[0]
 final fun org.jraf.klibjev.model/Choice(kotlin.collections/List<kotlin/String>, kotlin/Array<out org.jraf.klibjev.model/Question.Choice.Option>...): org.jraf.klibjev.model/Question.Choice // org.jraf.klibjev.model/Choice|Choice(kotlin.collections.List<kotlin.String>;kotlin.Array<out|org.jraf.klibjev.model.Question.Choice.Option>...){}[0]
 final fun org.jraf.klibjev.model/Choice(kotlin/String, kotlin.collections/Set<org.jraf.klibjev.model/Question.Choice.Option>): org.jraf.klibjev.model/Question.Choice // org.jraf.klibjev.model/Choice|Choice(kotlin.String;kotlin.collections.Set<org.jraf.klibjev.model.Question.Choice.Option>){}[0]
@@ -288,4 +337,5 @@ final fun org.jraf.klibjev.model/Score(kotlin/String, kotlin.collections/List<ko
 final fun org.jraf.klibjev.model/Score(kotlin/String, kotlin/Array<out kotlin/String>...): org.jraf.klibjev.model/Question.Score // org.jraf.klibjev.model/Score|Score(kotlin.String;kotlin.Array<out|kotlin.String>...){}[0]
 final fun org.jraf.klibjev.model/State(kotlin.collections/List<kotlin/String>): org.jraf.klibjev.model/State // org.jraf.klibjev.model/State|State(kotlin.collections.List<kotlin.String>){}[0]
 final fun org.jraf.klibjev.model/State(kotlin/String): org.jraf.klibjev.model/State // org.jraf.klibjev.model/State|State(kotlin.String){}[0]
+final suspend fun (org.jraf.klibjev.client/JevClient).org.jraf.klibjev.client/evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Asset>, kotlin/Array<out org.jraf.klibjev.model/Question>...): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/evaluate|evaluate@org.jraf.klibjev.client.JevClient(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Asset>;kotlin.Array<out|org.jraf.klibjev.model.Question>...){}[0]
 final suspend fun (org.jraf.klibjev.client/JevClient).org.jraf.klibjev.client/evaluate(org.jraf.klibjev.model/State, kotlin/Array<out org.jraf.klibjev.model/Question>...): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/evaluate|evaluate@org.jraf.klibjev.client.JevClient(org.jraf.klibjev.model.State;kotlin.Array<out|org.jraf.klibjev.model.Question>...){}[0]

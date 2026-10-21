@@ -3,7 +3,8 @@ public final class org/jraf/klibjev/VersionKt {
 }
 
 public abstract interface class org/jraf/klibjev/client/JevClient : java/lang/AutoCloseable {
-	public abstract fun evaluate-0E7RQCE (Lorg/jraf/klibjev/model/State;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun evaluate-BWLJW6A (Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class org/jraf/klibjev/client/JevClient$Configuration {
@@ -16,8 +17,9 @@ public final class org/jraf/klibjev/client/JevClient$Configuration {
 
 public final class org/jraf/klibjev/client/JevClient$Configuration$Http {
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;)V
-	public synthetic fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;Z)V
+	public synthetic fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBypassSslChecks ()Z
 	public final fun getLoggingLevel ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
 	public final fun getProxy ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
 	public final fun getUrlBase ()Ljava/lang/String;
@@ -40,9 +42,28 @@ public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
 	public final fun getPort ()I
 }
 
+public final class org/jraf/klibjev/client/JevClient$DefaultImpls {
+	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public final class org/jraf/klibjev/client/JevClientKt {
 	public static final fun JevClient (Lorg/jraf/klibjev/client/JevClient$Configuration;)Lorg/jraf/klibjev/client/JevClient;
+	public static final fun evaluate (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;[Lorg/jraf/klibjev/model/Question;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun evaluate (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;[Lorg/jraf/klibjev/model/Question;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class org/jraf/klibjev/model/Asset {
+	public abstract fun getId ()Ljava/lang/String;
+	public abstract fun getSource ()Lkotlinx/io/Source;
+}
+
+public final class org/jraf/klibjev/model/Asset$Image : org/jraf/klibjev/model/Asset {
+	public fun <init> (Ljava/lang/String;Lkotlinx/io/Source;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getId ()Ljava/lang/String;
+	public fun getSource ()Lkotlinx/io/Source;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class org/jraf/klibjev/model/EvaluateResponse {
@@ -52,6 +73,14 @@ public abstract interface class org/jraf/klibjev/model/EvaluateResponse {
 }
 
 public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer {
+}
+
+public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer$Box : org/jraf/klibjev/model/EvaluateResponse$Answer {
+	public abstract fun getBottom ()D
+	public abstract fun getConfidence ()D
+	public abstract fun getLeft ()D
+	public abstract fun getRight ()D
+	public abstract fun getTop ()D
 }
 
 public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Answer$Choice : org/jraf/klibjev/model/EvaluateResponse$Answer {
@@ -77,6 +106,14 @@ public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Usage {
 
 public abstract interface class org/jraf/klibjev/model/Question {
 	public abstract fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
+}
+
+public final class org/jraf/klibjev/model/Question$Box : org/jraf/klibjev/model/Question {
+	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class org/jraf/klibjev/model/Question$Choice : org/jraf/klibjev/model/Question {
@@ -191,6 +228,9 @@ public final class org/jraf/klibjev/model/Question$Score$Level$String : org/jraf
 }
 
 public final class org/jraf/klibjev/model/QuestionKt {
+	public static final fun Box (Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Box;
+	public static final fun Box (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Box;
+	public static final fun Box (Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Box;
 	public static final fun Choice (Ljava/lang/Object;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
 	public static final fun Choice (Ljava/lang/Object;[Lorg/jraf/klibjev/model/Question$Choice$Option;)Lorg/jraf/klibjev/model/Question$Choice;
 	public static final fun Choice (Ljava/lang/String;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
