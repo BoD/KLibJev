@@ -3,38 +3,38 @@
   <groupId>org.jraf.klibjev</groupId>
   <artifactId>klibjev-jvm</artifactId>
   <versioning>
-    <lastUpdated>20261021165821</lastUpdated>
+    <lastUpdated>20261021165917</lastUpdated>
     <snapshot>
-      <timestamp>20261021.165821</timestamp>
+      <timestamp>20261021.165917</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
-        <extension>jar</extension>
-        <value>1.1.1-20261021.165821-1</value>
-        <updated>20261021165821</updated>
+        <extension>module</extension>
+        <value>1.1.1-20261021.165917-1</value>
+        <updated>20261021165917</updated>
       </snapshotVersion>
       <snapshotVersion>
-        <classifier>sources</classifier>
-        <extension>jar</extension>
-        <value>1.1.1-20261021.165821-1</value>
-        <updated>20261021165821</updated>
+        <extension>pom</extension>
+        <value>1.1.1-20261021.165917-1</value>
+        <updated>20261021165917</updated>
       </snapshotVersion>
       <snapshotVersion>
         <classifier>javadoc</classifier>
         <extension>jar</extension>
-        <value>1.1.1-20261021.165821-1</value>
-        <updated>20261021165821</updated>
+        <value>1.1.1-20261021.165917-1</value>
+        <updated>20261021165917</updated>
       </snapshotVersion>
       <snapshotVersion>
-        <extension>module</extension>
-        <value>1.1.1-20261021.165821-1</value>
-        <updated>20261021165821</updated>
+        <extension>jar</extension>
+        <value>1.1.1-20261021.165917-1</value>
+        <updated>20261021165917</updated>
       </snapshotVersion>
       <snapshotVersion>
-        <extension>pom</extension>
-        <value>1.1.1-20261021.165821-1</value>
-        <updated>20261021165821</updated>
+        <classifier>sources</classifier>
+        <extension>jar</extension>
+        <value>1.1.1-20261021.165917-1</value>
+        <updated>20261021165917</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
