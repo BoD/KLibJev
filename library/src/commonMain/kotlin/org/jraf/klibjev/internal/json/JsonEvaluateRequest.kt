@@ -36,6 +36,7 @@ internal class JsonEvaluateRequest(
   val model: String,
   val state: JsonElement,
   val questions: Map<String, JsonQuestion>,
+  val assets: Map<String, JsonAsset>? = null,
 )
 
 @Serializable
@@ -68,4 +69,22 @@ internal sealed interface JsonQuestion {
     override val instructions: JsonElement,
     val criteria: List<JsonElement>,
   ) : JsonQuestion
+
+  @Serializable
+  @SerialName("box")
+  class Box(
+    override val instructions: JsonElement,
+  ) : JsonQuestion
+
+}
+
+@Serializable
+internal sealed interface JsonAsset {
+  val part: String
+
+  @Serializable
+  @SerialName("image")
+  class Image(
+    override val part: String,
+  ) : JsonAsset
 }

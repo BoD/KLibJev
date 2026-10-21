@@ -27,21 +27,53 @@ package org.jraf.klibjev.internal.client
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.forms.InputProvider
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
+import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
+import kotlinx.serialization.json.Json
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
 import org.jraf.klibjev.internal.json.JsonEvaluateResponse
+import org.jraf.klibjev.model.Asset
 
 internal class JevService(
   private val httpClient: HttpClient,
   private val urlBase: String,
+  private val json: Json,
 ) : AutoCloseable {
-  suspend fun evaluate(jsonEvaluateRequest: JsonEvaluateRequest): JsonEvaluateResponse {
+  suspend fun evaluate(jsonEvaluateRequest: JsonEvaluateRequest, assets: Set<Asset>): JsonEvaluateResponse {
     return httpClient.post(urlBase) {
-      contentType(ContentType.Application.Json)
-      setBody(jsonEvaluateRequest)
+      if (assets.isNotEmpty()) {
+        header("TypeSafe-Danger-Zone-Images", "true")
+        setBody(
+          MultiPartFormDataContent(
+            formData {
+              append(
+                key = "request",
+                value = json.encodeToString(jsonEvaluateRequest),
+                headers = Headers.build {
+                  append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                },
+              )
+              for (asset in assets) {
+                append(
+                  asset.id,
+                  InputProvider { asset.source },
+                )
+              }
+            },
+          ),
+        )
+      } else {
+        contentType(ContentType.Application.Json)
+        setBody(jsonEvaluateRequest)
+      }
     }.body()
   }
 

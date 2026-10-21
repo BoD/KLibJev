@@ -49,6 +49,14 @@ interface EvaluateResponse {
       val probabilities: Map<Question.Score.Level, Double>
       val confidence: Double
     }
+
+    interface Box : Answer {
+      val top: Double
+      val bottom: Double
+      val left: Double
+      val right: Double
+      val confidence: Double
+    }
   }
 
   interface Usage {

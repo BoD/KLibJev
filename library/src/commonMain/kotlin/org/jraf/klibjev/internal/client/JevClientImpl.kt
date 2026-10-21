@@ -26,6 +26,7 @@
 package org.jraf.klibjev.internal.client
 
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.ProxyBuilder
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.auth.Auth
@@ -48,14 +49,17 @@ import kotlinx.serialization.serializer
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
 import org.jraf.klibjev.internal.json.JsonAnswer
+import org.jraf.klibjev.internal.json.JsonAsset
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
 import org.jraf.klibjev.internal.json.JsonEvaluateResponse
 import org.jraf.klibjev.internal.json.JsonQuestion
+import org.jraf.klibjev.internal.model.BoxImpl
 import org.jraf.klibjev.internal.model.ChoiceImpl
 import org.jraf.klibjev.internal.model.EvaluateResponseImpl
 import org.jraf.klibjev.internal.model.NoulImpl
 import org.jraf.klibjev.internal.model.ScoreImpl
 import org.jraf.klibjev.internal.model.UsageImpl
+import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
@@ -64,19 +68,19 @@ import org.jraf.klibnanolog.logd
 internal class JevClientImpl(
   private var configuration: Configuration,
 ) : JevClient {
+  private val json = Json {
+    ignoreUnknownKeys = true
+    useAlternativeNames = false
+  }
+
   private val service: JevService by lazy {
-    JevService(httpClient = provideHttpClient(), urlBase = configuration.http.urlBase)
+    JevService(httpClient = provideHttpClient(), urlBase = configuration.http.urlBase, json = json)
   }
 
   private fun provideHttpClient(): HttpClient {
-    return HttpClient {
+    return createHttpClient(configuration.http) {
       install(ContentNegotiation) {
-        json(
-          Json {
-            ignoreUnknownKeys = true
-            useAlternativeNames = false
-          },
-        )
+        json(json)
       }
       install(HttpTimeout) {
         requestTimeoutMillis = 60_000
@@ -132,18 +136,25 @@ internal class JevClientImpl(
   override suspend fun evaluate(
     state: State,
     questions: Set<Question>,
+    assets: Set<Asset>,
   ): Result<EvaluateResponse> {
-    val questionIds: Map<String, Question> = questions.toList().mapIndexed { index, question -> "q$index" to question }.toMap()
+    val questionsById: Map<String, Question> = questions.toList().mapIndexed { index, question -> "q$index" to question }.toMap()
     val jsonEvaluateRequest = JsonEvaluateRequest(
       model = configuration.model,
       state = state.toJsonState(),
-      questions = questions.toJsonQuestionsMap(questionIds),
+      questions = questions.toJsonQuestionsMap(questionsById),
+      assets = assets.toJsonAssetsMap(),
     )
     return runCatching {
-      service.evaluate(jsonEvaluateRequest).toEvaluateResponse(questionIds)
+      service.evaluate(jsonEvaluateRequest, assets).toEvaluateResponse(questionsById)
     }
   }
 }
+
+internal expect fun createHttpClient(
+  configuration: Configuration.Http,
+  configure: HttpClientConfig<*>.() -> Unit,
+): HttpClient
 
 private fun State.toJsonState(): JsonElement {
   return when (this) {
@@ -161,9 +172,9 @@ private fun State.toJsonState(): JsonElement {
   }
 }
 
-private fun Set<Question>.toJsonQuestionsMap(questionIds: Map<String, Question>): Map<String, JsonQuestion> {
+private fun Set<Question>.toJsonQuestionsMap(questionsById: Map<String, Question>): Map<String, JsonQuestion> {
   return this.associate { question ->
-    questionIds.entries.first { it.value == question }.key to when (question) {
+    questionsById.entries.first { it.value == question }.key to when (question) {
       is Question.Noul -> JsonQuestion.Noul(
         instructions = question.instructions.toJsonInstructions(),
         criteria = question.criteria?.let { JsonQuestion.Noul.JsonCriteria(it.`true`, it.`false`) },
@@ -177,6 +188,10 @@ private fun Set<Question>.toJsonQuestionsMap(questionIds: Map<String, Question>)
       is Question.Score -> JsonQuestion.Score(
         instructions = question.instructions.toJsonInstructions(),
         criteria = question.levels.map { it.toJsonElement() },
+      )
+
+      is Question.Box -> JsonQuestion.Box(
+        instructions = question.instructions.toJsonInstructions(),
       )
     }
   }
@@ -210,11 +225,11 @@ private fun Question.Score.Level.toJsonElement(): JsonElement {
   }
 }
 
-private fun JsonEvaluateResponse.toEvaluateResponse(questionIds: Map<String, Question>): EvaluateResponse {
+private fun JsonEvaluateResponse.toEvaluateResponse(questionsById: Map<String, Question>): EvaluateResponse {
   return EvaluateResponseImpl(
     model = this.model,
     answers = this.answers.map { (questionId, answer) ->
-      val question = questionIds[questionId]
+      val question = questionsById[questionId]
       (question ?: error("Unknown question ID: $questionId")) to answer.toAnswer(question)
     }.toMap(),
     usage = UsageImpl(
@@ -260,6 +275,20 @@ private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
       }.toMap(),
       confidence = this.confidence,
     )
+
+    is JsonAnswer.Box -> BoxImpl(
+      top = this.box.top,
+      bottom = this.box.bottom,
+      left = this.box.left,
+      right = this.box.right,
+      confidence = this.confidence,
+    )
+  }
+}
+
+private fun Set<Asset>.toJsonAssetsMap(): Map<String, JsonAsset.Image>? = if (isEmpty()) null else associate { asset ->
+  when (asset) {
+    is Asset.Image -> asset.id to JsonAsset.Image(part = asset.id)
   }
 }
 

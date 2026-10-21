@@ -48,6 +48,14 @@ internal data class ScoreImpl(
   override val confidence: Double,
 ) : EvaluateResponse.Answer.Score
 
+internal data class BoxImpl(
+  override val top: Double,
+  override val bottom: Double,
+  override val left: Double,
+  override val right: Double,
+  override val confidence: Double,
+) : EvaluateResponse.Answer.Box
+
 internal data class UsageImpl(
   override val inputTokens: Int,
   override val outputTokens: Int,

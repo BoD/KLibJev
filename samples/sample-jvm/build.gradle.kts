@@ -10,12 +10,13 @@ dependencies {
   // Logging
   implementation(libs.klibnanolog)
 
-  // Date time
-  implementation(libs.kotlinx.datetime)
-
   // Serialization
   implementation(libs.kotlinx.serialization.json)
 
   // Library
   implementation(project(":klibjev"))
+}
+
+kotlin {
+  jvmToolchain(25)
 }

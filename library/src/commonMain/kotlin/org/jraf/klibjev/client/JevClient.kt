@@ -26,6 +26,7 @@
 package org.jraf.klibjev.client
 
 import org.jraf.klibjev.internal.client.JevClientImpl
+import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
@@ -40,6 +41,7 @@ interface JevClient : AutoCloseable {
       val urlBase: String = "https://api.typesafe.ai/v1/systemone",
       val loggingLevel: LoggingLevel = LoggingLevel.NONE,
       val proxy: Proxy? = null,
+      val bypassSslChecks: Boolean = false,
     ) {
       class Proxy(
         val host: String,
@@ -62,6 +64,7 @@ interface JevClient : AutoCloseable {
   suspend fun evaluate(
     state: State,
     questions: Set<Question>,
+    assets: Set<Asset> = emptySet(),
   ): Result<EvaluateResponse>
 }
 
@@ -69,5 +72,11 @@ fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl
 
 suspend fun JevClient.evaluate(
   state: State,
+  assets: Set<Asset>,
   vararg questions: Question,
-): Result<EvaluateResponse> = evaluate(state, questions.toSet())
+): Result<EvaluateResponse> = evaluate(state = state, questions = questions.toSet(), assets = assets)
+
+suspend fun JevClient.evaluate(
+  state: State,
+  vararg questions: Question,
+): Result<EvaluateResponse> = evaluate(state = state, questions = questions.toSet(), assets = emptySet())

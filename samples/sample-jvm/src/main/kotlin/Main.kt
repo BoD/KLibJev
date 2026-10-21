@@ -23,21 +23,37 @@
  * limitations under the License.
  */
 
+import kotlinx.io.asSource
+import kotlinx.io.buffered
 import kotlinx.serialization.Serializable
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
 import org.jraf.klibjev.client.JevClient.Configuration.Http
 import org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel
 import org.jraf.klibjev.client.evaluate
+import org.jraf.klibjev.model.Asset
+import org.jraf.klibjev.model.Box
 import org.jraf.klibjev.model.Choice
+import org.jraf.klibjev.model.EvaluateResponse.Answer
 import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question.Choice.Option
 import org.jraf.klibjev.model.Score
 import org.jraf.klibjev.model.State
+import java.io.File
 
 suspend fun main(av: Array<String>) {
-  JevClient(Configuration(apiKey = av[0], http = Http(loggingLevel = LoggingLevel.ALL))).use { jevClient ->
-    val answers = jevClient.evaluate(
+  JevClient(
+    configuration = Configuration(
+      apiKey = av[0],
+      http = Http(
+        loggingLevel = LoggingLevel.ALL,
+//        proxy = Http.Proxy("localhost", 8888),
+//        bypassSslChecks = true,
+      ),
+      model = "jev-preview",
+    ),
+  ).use { jevClient ->
+    val answers1 = jevClient.evaluate(
       state = State("Bonjour !"),
       Noul(instructions = "Is this a greeting?"),
 
@@ -60,7 +76,43 @@ suspend fun main(av: Array<String>) {
         ComplexLevel("Very warm", listOf("Hello, friend!", "Hi there, buddy!", "Greetings, my dear!")),
       ),
     ).getOrThrow()
-    println("Answers: $answers")
+    println("Answers 1: $answers1")
+
+    val answers2 = jevClient.evaluate(
+      state = State("`image1`"),
+      assets = setOf(
+        Asset.Image(
+          id = "image1",
+          source = File("samples/sample-jvm/assets/strawberry.png").inputStream().asSource().buffered(),
+        ),
+      ),
+      Choice(
+        instructions = "What is the main object in the image?",
+        Option("Apple"),
+        Option("Banana"),
+        Option("Strawberry"),
+        Option("Orange"),
+        Option("Raspberry"),
+      ),
+    ).getOrThrow()
+    println("Answers 2: $answers2")
+
+    val answers3 = jevClient.evaluate(
+      state = State("`image1`"),
+      assets = setOf(
+        Asset.Image(
+          id = "image1",
+          source = File("samples/sample-jvm/assets/strawberry-raspberry.png").inputStream().asSource().buffered(),
+        ),
+      ),
+      Box(
+        instructions = "Raspberry",
+      ),
+    ).getOrThrow()
+    val boxAnswer = answers3.answers.values.firstOrNull() as Answer.Box
+    val imageWidth = 1568
+    val imageHeight = 887
+    println("Answers 3: top=${boxAnswer.top * imageHeight}, bottom=${boxAnswer.bottom * imageHeight}, left=${boxAnswer.left * imageWidth}, right=${boxAnswer.right * imageWidth}")
   }
 }
 
