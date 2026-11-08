@@ -64,7 +64,6 @@ import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
-import org.jraf.klibnanolog.logd
 
 internal class JevClientImpl(
   private var configuration: Configuration,
@@ -115,7 +114,7 @@ internal class JevClientImpl(
         install(Logging) {
           logger = object : Logger {
             override fun log(message: String) {
-              logd(message)
+              configuration.http.logger(message)
             }
           }
           level = when (configuration.http.loggingLevel) {

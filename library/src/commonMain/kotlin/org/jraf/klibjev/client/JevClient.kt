@@ -40,6 +40,7 @@ interface JevClient : AutoCloseable {
     class Http(
       val urlBase: String = "https://api.typesafe.ai/v1/systemone",
       val loggingLevel: LoggingLevel = LoggingLevel.NONE,
+      val logger: (message: String) -> Unit = { message -> println(message) },
       val proxy: Proxy? = null,
       val bypassSslChecks: Boolean = false,
     ) {

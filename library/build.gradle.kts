@@ -24,9 +24,6 @@ kotlin {
         // Serialization
         implementation(libs.kotlinx.serialization.json)
 
-        // Logging
-        implementation(libs.klibnanolog)
-
         // Kotlinx IO
         api(libs.kotlinx.io)
       }
@@ -43,9 +40,6 @@ kotlin {
 
     jvmMain {
       dependencies {
-        // Coroutines
-        implementation(libs.kotlinx.coroutines.jdk9)
-
         // Ktor OkHttp
         implementation(libs.ktor.client.okhttp)
       }

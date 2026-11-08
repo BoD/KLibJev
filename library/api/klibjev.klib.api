@@ -20,10 +20,12 @@ abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { //
             final fun <get-model>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.model.<get-model>|<get-model>(){}[0]
 
         final class Http { // org.jraf.klibjev.client/JevClient.Configuration.Http|null[0]
-            constructor <init>(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ..., kotlin/Boolean = ...) // org.jraf.klibjev.client/JevClient.Configuration.Http.<init>|<init>(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?;kotlin.Boolean){}[0]
+            constructor <init>(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., kotlin/Function1<kotlin/String, kotlin/Unit> = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ..., kotlin/Boolean = ...) // org.jraf.klibjev.client/JevClient.Configuration.Http.<init>|<init>(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;kotlin.Function1<kotlin.String,kotlin.Unit>;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?;kotlin.Boolean){}[0]
 
             final val bypassSslChecks // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks|{}bypassSslChecks[0]
                 final fun <get-bypassSslChecks>(): kotlin/Boolean // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks.<get-bypassSslChecks>|<get-bypassSslChecks>(){}[0]
+            final val logger // org.jraf.klibjev.client/JevClient.Configuration.Http.logger|{}logger[0]
+                final fun <get-logger>(): kotlin/Function1<kotlin/String, kotlin/Unit> // org.jraf.klibjev.client/JevClient.Configuration.Http.logger.<get-logger>|<get-logger>(){}[0]
             final val loggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel|{}loggingLevel[0]
                 final fun <get-loggingLevel>(): org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel.<get-loggingLevel>|<get-loggingLevel>(){}[0]
             final val proxy // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy|{}proxy[0]
