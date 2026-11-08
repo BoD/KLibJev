@@ -48,6 +48,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.serializer
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
+import org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel
 import org.jraf.klibjev.internal.json.JsonAnswer
 import org.jraf.klibjev.internal.json.JsonAsset
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
@@ -110,7 +111,7 @@ internal class JevClientImpl(
       }
 
       // Setup logging if requested
-      if (configuration.http.loggingLevel != Configuration.Http.LoggingLevel.NONE) {
+      if (configuration.http.loggingLevel != LoggingLevel.NONE) {
         install(Logging) {
           logger = object : Logger {
             override fun log(message: String) {
@@ -118,11 +119,11 @@ internal class JevClientImpl(
             }
           }
           level = when (configuration.http.loggingLevel) {
-            Configuration.Http.LoggingLevel.NONE -> LogLevel.NONE
-            Configuration.Http.LoggingLevel.INFO -> LogLevel.INFO
-            Configuration.Http.LoggingLevel.HEADERS -> LogLevel.HEADERS
-            Configuration.Http.LoggingLevel.BODY -> LogLevel.BODY
-            Configuration.Http.LoggingLevel.ALL -> LogLevel.ALL
+            LoggingLevel.NONE -> LogLevel.NONE
+            LoggingLevel.INFO -> LogLevel.INFO
+            LoggingLevel.HEADERS -> LogLevel.HEADERS
+            LoggingLevel.BODY -> LogLevel.BODY
+            LoggingLevel.ALL -> LogLevel.ALL
           }
         }
       }
