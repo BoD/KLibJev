@@ -36,7 +36,7 @@ import org.jraf.klibjev.model.Box
 import org.jraf.klibjev.model.Choice
 import org.jraf.klibjev.model.EvaluateResponse.Answer
 import org.jraf.klibjev.model.Noul
-import org.jraf.klibjev.model.Question.Choice.Option
+import org.jraf.klibjev.model.Question.Choice.Companion.Option
 import org.jraf.klibjev.model.Score
 import org.jraf.klibjev.model.State
 import java.io.File
