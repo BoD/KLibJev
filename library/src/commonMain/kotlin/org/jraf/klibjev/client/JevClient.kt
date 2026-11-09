@@ -25,9 +25,15 @@
 
 package org.jraf.klibjev.client
 
-import dev.drewhamilton.poko.Poko
+import org.jetbrains.kotlinx.library.api.watchdog.ExemptionReason
 import org.jetbrains.kotlinx.library.api.watchdog.IntentionallyInconsistentParameterOrder
+import org.jetbrains.kotlinx.library.api.watchdog.IntentionallyOpen
 import org.jraf.klibjev.InternalKLibJevApi
+import org.jraf.klibjev.client.JevClient.Configuration
+import org.jraf.klibjev.client.JevClient.Configuration.Http
+import org.jraf.klibjev.internal.client.ConfigurationImpl
+import org.jraf.klibjev.internal.client.ConfigurationImpl.HttpImpl
+import org.jraf.klibjev.internal.client.ConfigurationImpl.HttpImpl.ProxyImpl
 import org.jraf.klibjev.internal.client.JevClientImpl
 import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
@@ -36,25 +42,25 @@ import org.jraf.klibjev.model.State
 
 @SubclassOptInRequired(InternalKLibJevApi::class)
 public interface JevClient : AutoCloseable {
-  @Poko
-  public class Configuration(
-    public val apiKey: String,
-    public val model: String = "jev-latest",
-    public val http: Http = Http(),
-  ) {
-    @Poko
-    public class Http(
-      public val urlBase: String = "https://api.typesafe.ai/v1/systemone",
-      public val loggingLevel: LoggingLevel = LoggingLevel.NONE,
-      public val logger: (message: String) -> Unit = { message -> println(message) },
-      public val proxy: Proxy? = null,
-      public val bypassSslChecks: Boolean = false,
-    ) {
-      @Poko
-      public class Proxy(
-        public val host: String,
-        public val port: Int,
-      )
+  @IntentionallyOpen(reason = ExemptionReason.API_DESIGN)
+  public interface Configuration {
+    public val apiKey: String
+    public val model: String
+    public val http: Http
+
+    @IntentionallyOpen(reason = ExemptionReason.API_DESIGN)
+    public interface Http {
+      public val urlBase: String
+      public val loggingLevel: LoggingLevel
+      public val logger: (message: String) -> Unit
+      public val proxy: Proxy?
+      public val bypassSslChecks: Boolean
+
+      @IntentionallyOpen(reason = ExemptionReason.API_DESIGN)
+      public interface Proxy {
+        public val host: String
+        public val port: Int
+      }
 
       public enum class LoggingLevel {
         /**
@@ -66,6 +72,32 @@ public interface JevClient : AutoCloseable {
         BODY,
         ALL,
       }
+
+      public companion object {
+        public fun Proxy(
+          host: String,
+          port: Int,
+        ): Proxy = ProxyImpl(
+          host = host,
+          port = port,
+        )
+      }
+    }
+
+    public companion object {
+      public fun Http(
+        urlBase: String = "https://api.typesafe.ai/v1/systemone",
+        loggingLevel: Http.LoggingLevel = Http.LoggingLevel.NONE,
+        logger: (message: String) -> Unit = { message -> println(message) },
+        proxy: Http.Proxy? = null,
+        bypassSslChecks: Boolean = false,
+      ): Http = HttpImpl(
+        urlBase = urlBase,
+        loggingLevel = loggingLevel,
+        logger = logger,
+        proxy = proxy,
+        bypassSslChecks = bypassSslChecks,
+      )
     }
   }
 
@@ -74,18 +106,30 @@ public interface JevClient : AutoCloseable {
     assets: Set<Asset>,
     questions: Set<Question>,
   ): Result<EvaluateResponse>
+
+  public companion object {
+    public fun Configuration(
+      apiKey: String,
+      model: String = "jev-latest",
+      http: Http = Configuration.Http(),
+    ): Configuration = ConfigurationImpl(
+      apiKey = apiKey,
+      model = model,
+      http = http,
+    )
+  }
 }
 
-public fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl(configuration)
+public fun JevClient(configuration: Configuration): JevClient = JevClientImpl(configuration)
 
-@IntentionallyInconsistentParameterOrder
+@IntentionallyInconsistentParameterOrder(reason = ExemptionReason.API_DESIGN)
 public suspend fun JevClient.evaluate(
   state: State,
   assets: Set<Asset>,
   vararg questions: Question,
 ): Result<EvaluateResponse> = evaluate(state = state, questions = questions.toSet(), assets = assets)
 
-@IntentionallyInconsistentParameterOrder
+@IntentionallyInconsistentParameterOrder(reason = ExemptionReason.API_DESIGN)
 public suspend fun JevClient.evaluate(
   state: State,
   vararg questions: Question,

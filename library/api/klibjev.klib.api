@@ -6,32 +6,32 @@
 // - Show declarations: true
 
 // Library unique name: <org.jraf.klibjev:klibjev>
+open annotation class org.jraf.klibjev/InternalKLibJevApi : kotlin/Annotation { // org.jraf.klibjev/InternalKLibJevApi|null[0]
+    constructor <init>() // org.jraf.klibjev/InternalKLibJevApi.<init>|<init>(){}[0]
+}
+
 abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { // org.jraf.klibjev.client/JevClient|null[0]
-    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Question>, kotlin.collections/Set<org.jraf.klibjev.model/Asset> = ...): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Question>;kotlin.collections.Set<org.jraf.klibjev.model.Asset>){}[0]
+    abstract suspend fun evaluate(org.jraf.klibjev.model/State, kotlin.collections/Set<org.jraf.klibjev.model/Asset>, kotlin.collections/Set<org.jraf.klibjev.model/Question>): kotlin/Result<org.jraf.klibjev.model/EvaluateResponse> // org.jraf.klibjev.client/JevClient.evaluate|evaluate(org.jraf.klibjev.model.State;kotlin.collections.Set<org.jraf.klibjev.model.Asset>;kotlin.collections.Set<org.jraf.klibjev.model.Question>){}[0]
 
-    final class Configuration { // org.jraf.klibjev.client/JevClient.Configuration|null[0]
-        constructor <init>(kotlin/String, kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http = ...) // org.jraf.klibjev.client/JevClient.Configuration.<init>|<init>(kotlin.String;kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http){}[0]
+    abstract interface Configuration { // org.jraf.klibjev.client/JevClient.Configuration|null[0]
+        abstract val apiKey // org.jraf.klibjev.client/JevClient.Configuration.apiKey|{}apiKey[0]
+            abstract fun <get-apiKey>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.apiKey.<get-apiKey>|<get-apiKey>(){}[0]
+        abstract val http // org.jraf.klibjev.client/JevClient.Configuration.http|{}http[0]
+            abstract fun <get-http>(): org.jraf.klibjev.client/JevClient.Configuration.Http // org.jraf.klibjev.client/JevClient.Configuration.http.<get-http>|<get-http>(){}[0]
+        abstract val model // org.jraf.klibjev.client/JevClient.Configuration.model|{}model[0]
+            abstract fun <get-model>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.model.<get-model>|<get-model>(){}[0]
 
-        final val apiKey // org.jraf.klibjev.client/JevClient.Configuration.apiKey|{}apiKey[0]
-            final fun <get-apiKey>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.apiKey.<get-apiKey>|<get-apiKey>(){}[0]
-        final val http // org.jraf.klibjev.client/JevClient.Configuration.http|{}http[0]
-            final fun <get-http>(): org.jraf.klibjev.client/JevClient.Configuration.Http // org.jraf.klibjev.client/JevClient.Configuration.http.<get-http>|<get-http>(){}[0]
-        final val model // org.jraf.klibjev.client/JevClient.Configuration.model|{}model[0]
-            final fun <get-model>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.model.<get-model>|<get-model>(){}[0]
-
-        final class Http { // org.jraf.klibjev.client/JevClient.Configuration.Http|null[0]
-            constructor <init>(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., kotlin/Function1<kotlin/String, kotlin/Unit> = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ..., kotlin/Boolean = ...) // org.jraf.klibjev.client/JevClient.Configuration.Http.<init>|<init>(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;kotlin.Function1<kotlin.String,kotlin.Unit>;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?;kotlin.Boolean){}[0]
-
-            final val bypassSslChecks // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks|{}bypassSslChecks[0]
-                final fun <get-bypassSslChecks>(): kotlin/Boolean // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks.<get-bypassSslChecks>|<get-bypassSslChecks>(){}[0]
-            final val logger // org.jraf.klibjev.client/JevClient.Configuration.Http.logger|{}logger[0]
-                final fun <get-logger>(): kotlin/Function1<kotlin/String, kotlin/Unit> // org.jraf.klibjev.client/JevClient.Configuration.Http.logger.<get-logger>|<get-logger>(){}[0]
-            final val loggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel|{}loggingLevel[0]
-                final fun <get-loggingLevel>(): org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel.<get-loggingLevel>|<get-loggingLevel>(){}[0]
-            final val proxy // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy|{}proxy[0]
-                final fun <get-proxy>(): org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy.<get-proxy>|<get-proxy>(){}[0]
-            final val urlBase // org.jraf.klibjev.client/JevClient.Configuration.Http.urlBase|{}urlBase[0]
-                final fun <get-urlBase>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.Http.urlBase.<get-urlBase>|<get-urlBase>(){}[0]
+        abstract interface Http { // org.jraf.klibjev.client/JevClient.Configuration.Http|null[0]
+            abstract val bypassSslChecks // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks|{}bypassSslChecks[0]
+                abstract fun <get-bypassSslChecks>(): kotlin/Boolean // org.jraf.klibjev.client/JevClient.Configuration.Http.bypassSslChecks.<get-bypassSslChecks>|<get-bypassSslChecks>(){}[0]
+            abstract val logger // org.jraf.klibjev.client/JevClient.Configuration.Http.logger|{}logger[0]
+                abstract fun <get-logger>(): kotlin/Function1<kotlin/String, kotlin/Unit> // org.jraf.klibjev.client/JevClient.Configuration.Http.logger.<get-logger>|<get-logger>(){}[0]
+            abstract val loggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel|{}loggingLevel[0]
+                abstract fun <get-loggingLevel>(): org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel // org.jraf.klibjev.client/JevClient.Configuration.Http.loggingLevel.<get-loggingLevel>|<get-loggingLevel>(){}[0]
+            abstract val proxy // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy|{}proxy[0]
+                abstract fun <get-proxy>(): org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? // org.jraf.klibjev.client/JevClient.Configuration.Http.proxy.<get-proxy>|<get-proxy>(){}[0]
+            abstract val urlBase // org.jraf.klibjev.client/JevClient.Configuration.Http.urlBase|{}urlBase[0]
+                abstract fun <get-urlBase>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.Http.urlBase.<get-urlBase>|<get-urlBase>(){}[0]
 
             final enum class LoggingLevel : kotlin/Enum<org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel> { // org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel|null[0]
                 enum entry ALL // org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel.ALL|null[0]
@@ -47,15 +47,25 @@ abstract interface org.jraf.klibjev.client/JevClient : kotlin/AutoCloseable { //
                 final fun values(): kotlin/Array<org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel> // org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel.values|values#static(){}[0]
             }
 
-            final class Proxy { // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy|null[0]
-                constructor <init>(kotlin/String, kotlin/Int) // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.<init>|<init>(kotlin.String;kotlin.Int){}[0]
+            abstract interface Proxy { // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy|null[0]
+                abstract val host // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.host|{}host[0]
+                    abstract fun <get-host>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.host.<get-host>|<get-host>(){}[0]
+                abstract val port // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.port|{}port[0]
+                    abstract fun <get-port>(): kotlin/Int // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.port.<get-port>|<get-port>(){}[0]
+            }
 
-                final val host // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.host|{}host[0]
-                    final fun <get-host>(): kotlin/String // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.host.<get-host>|<get-host>(){}[0]
-                final val port // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.port|{}port[0]
-                    final fun <get-port>(): kotlin/Int // org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy.port.<get-port>|<get-port>(){}[0]
+            final object Companion { // org.jraf.klibjev.client/JevClient.Configuration.Http.Companion|null[0]
+                final fun Proxy(kotlin/String, kotlin/Int): org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy // org.jraf.klibjev.client/JevClient.Configuration.Http.Companion.Proxy|Proxy(kotlin.String;kotlin.Int){}[0]
             }
         }
+
+        final object Companion { // org.jraf.klibjev.client/JevClient.Configuration.Companion|null[0]
+            final fun Http(kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.LoggingLevel = ..., kotlin/Function1<kotlin/String, kotlin/Unit> = ..., org.jraf.klibjev.client/JevClient.Configuration.Http.Proxy? = ..., kotlin/Boolean = ...): org.jraf.klibjev.client/JevClient.Configuration.Http // org.jraf.klibjev.client/JevClient.Configuration.Companion.Http|Http(kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel;kotlin.Function1<kotlin.String,kotlin.Unit>;org.jraf.klibjev.client.JevClient.Configuration.Http.Proxy?;kotlin.Boolean){}[0]
+        }
+    }
+
+    final object Companion { // org.jraf.klibjev.client/JevClient.Companion|null[0]
+        final fun Configuration(kotlin/String, kotlin/String = ..., org.jraf.klibjev.client/JevClient.Configuration.Http = ...): org.jraf.klibjev.client/JevClient.Configuration // org.jraf.klibjev.client/JevClient.Companion.Configuration|Configuration(kotlin.String;kotlin.String;org.jraf.klibjev.client.JevClient.Configuration.Http){}[0]
     }
 }
 

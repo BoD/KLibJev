@@ -27,8 +27,8 @@ import kotlinx.io.asSource
 import kotlinx.io.buffered
 import kotlinx.serialization.Serializable
 import org.jraf.klibjev.client.JevClient
-import org.jraf.klibjev.client.JevClient.Configuration
-import org.jraf.klibjev.client.JevClient.Configuration.Http
+import org.jraf.klibjev.client.JevClient.Companion.Configuration
+import org.jraf.klibjev.client.JevClient.Configuration.Companion.Http
 import org.jraf.klibjev.client.JevClient.Configuration.Http.LoggingLevel
 import org.jraf.klibjev.client.evaluate
 import org.jraf.klibjev.model.Asset

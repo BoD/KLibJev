@@ -1,29 +1,43 @@
+public abstract interface annotation class org/jraf/klibjev/InternalKLibJevApi : java/lang/annotation/Annotation {
+}
+
 public final class org/jraf/klibjev/VersionKt {
 	public static final field VERSION Ljava/lang/String;
 }
 
 public abstract interface class org/jraf/klibjev/client/JevClient : java/lang/AutoCloseable {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Companion;
 	public abstract fun evaluate-BWLJW6A (Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getApiKey ()Ljava/lang/String;
-	public final fun getHttp ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
-	public final fun getModel ()Ljava/lang/String;
+public final class org/jraf/klibjev/client/JevClient$Companion {
+	public final fun Configuration (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;)Lorg/jraf/klibjev/client/JevClient$Configuration;
+	public static synthetic fun Configuration$default (Lorg/jraf/klibjev/client/JevClient$Companion;Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;ILjava/lang/Object;)Lorg/jraf/klibjev/client/JevClient$Configuration;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration$Http {
-	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;Z)V
-	public synthetic fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getBypassSslChecks ()Z
-	public final fun getLogger ()Lkotlin/jvm/functions/Function1;
-	public final fun getLoggingLevel ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
-	public final fun getProxy ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
-	public final fun getUrlBase ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Configuration$Companion;
+	public abstract fun getApiKey ()Ljava/lang/String;
+	public abstract fun getHttp ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+	public abstract fun getModel ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/client/JevClient$Configuration$Companion {
+	public final fun Http (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;Z)Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+	public static synthetic fun Http$default (Lorg/jraf/klibjev/client/JevClient$Configuration$Companion;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ZILjava/lang/Object;)Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+}
+
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration$Http {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Companion;
+	public abstract fun getBypassSslChecks ()Z
+	public abstract fun getLogger ()Lkotlin/jvm/functions/Function1;
+	public abstract fun getLoggingLevel ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
+	public abstract fun getProxy ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
+	public abstract fun getUrlBase ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Companion {
+	public final fun Proxy (Ljava/lang/String;I)Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
 }
 
 public final class org/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel : java/lang/Enum {
@@ -37,14 +51,9 @@ public final class org/jraf/klibjev/client/JevClient$Configuration$Http$LoggingL
 	public static fun values ()[Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
-	public fun <init> (Ljava/lang/String;I)V
-	public final fun getHost ()Ljava/lang/String;
-	public final fun getPort ()I
-}
-
-public final class org/jraf/klibjev/client/JevClient$DefaultImpls {
-	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
+	public abstract fun getHost ()Ljava/lang/String;
+	public abstract fun getPort ()I
 }
 
 public final class org/jraf/klibjev/client/JevClientKt {
