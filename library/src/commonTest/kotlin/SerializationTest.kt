@@ -30,11 +30,11 @@ package org.jraf.klibjev
 import com.apollographql.mockserver.MockServer
 import com.apollographql.mockserver.enqueueError
 import com.apollographql.mockserver.enqueueString
-import io.ktor.client.request.invoke
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import okio.use
 import org.jraf.klibjev.client.JevClient
+import org.jraf.klibjev.client.JevClient.Companion.Configuration
 import org.jraf.klibjev.client.JevClient.Configuration
 import org.jraf.klibjev.internal.model.AnswerChoiceImpl
 import org.jraf.klibjev.internal.model.AnswerNoulImpl
@@ -55,6 +55,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
@@ -71,6 +72,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State(listOf("Help! My payouts have been failing for 3 days.")),
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
@@ -107,6 +109,7 @@ class SerializationTest {
 
         jevClient.evaluate(
           state = state,
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Is the customer asking for a refund?")),
         )
         assertEquals(
@@ -173,6 +176,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         val answers = jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
+          assets = emptySet(),
           questions = setOf(
             Noul(instructions = "Does this convey urgency?"),
             Choice(

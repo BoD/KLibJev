@@ -129,17 +129,10 @@ sealed interface org.jraf.klibjev.model/Asset { // org.jraf.klibjev.model/Asset|
     abstract val source // org.jraf.klibjev.model/Asset.source|{}source[0]
         abstract fun <get-source>(): kotlinx.io/Source // org.jraf.klibjev.model/Asset.source.<get-source>|<get-source>(){}[0]
 
-    final class Image : org.jraf.klibjev.model/Asset { // org.jraf.klibjev.model/Asset.Image|null[0]
-        constructor <init>(kotlin/String, kotlinx.io/Source) // org.jraf.klibjev.model/Asset.Image.<init>|<init>(kotlin.String;kotlinx.io.Source){}[0]
+    abstract interface Image : org.jraf.klibjev.model/Asset // org.jraf.klibjev.model/Asset.Image|null[0]
 
-        final val id // org.jraf.klibjev.model/Asset.Image.id|{}id[0]
-            final fun <get-id>(): kotlin/String // org.jraf.klibjev.model/Asset.Image.id.<get-id>|<get-id>(){}[0]
-        final val source // org.jraf.klibjev.model/Asset.Image.source|{}source[0]
-            final fun <get-source>(): kotlinx.io/Source // org.jraf.klibjev.model/Asset.Image.source.<get-source>|<get-source>(){}[0]
-
-        final fun equals(kotlin/Any?): kotlin/Boolean // org.jraf.klibjev.model/Asset.Image.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // org.jraf.klibjev.model/Asset.Image.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // org.jraf.klibjev.model/Asset.Image.toString|toString(){}[0]
+    final object Companion { // org.jraf.klibjev.model/Asset.Companion|null[0]
+        final fun Image(kotlin/String, kotlinx.io/Source): org.jraf.klibjev.model/Asset.Image // org.jraf.klibjev.model/Asset.Companion.Image|Image(kotlin.String;kotlinx.io.Source){}[0]
     }
 }
 

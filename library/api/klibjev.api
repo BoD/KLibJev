@@ -63,17 +63,16 @@ public final class org/jraf/klibjev/client/JevClientKt {
 }
 
 public abstract interface class org/jraf/klibjev/model/Asset {
+	public static final field Companion Lorg/jraf/klibjev/model/Asset$Companion;
 	public abstract fun getId ()Ljava/lang/String;
 	public abstract fun getSource ()Lkotlinx/io/Source;
 }
 
-public final class org/jraf/klibjev/model/Asset$Image : org/jraf/klibjev/model/Asset {
-	public fun <init> (Ljava/lang/String;Lkotlinx/io/Source;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public fun getId ()Ljava/lang/String;
-	public fun getSource ()Lkotlinx/io/Source;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Asset$Companion {
+	public final fun Image (Ljava/lang/String;Lkotlinx/io/Source;)Lorg/jraf/klibjev/model/Asset$Image;
+}
+
+public abstract interface class org/jraf/klibjev/model/Asset$Image : org/jraf/klibjev/model/Asset {
 }
 
 public abstract interface class org/jraf/klibjev/model/EvaluateResponse {

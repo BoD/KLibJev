@@ -25,16 +25,18 @@
 
 package org.jraf.klibjev.model
 
-import dev.drewhamilton.poko.Poko
 import kotlinx.io.Source
+import org.jraf.klibjev.InternalKLibJevApi
+import org.jraf.klibjev.internal.model.ImageImpl
 
 public sealed interface Asset {
   public val id: String
   public val source: Source
 
-  @Poko
-  public class Image(
-    override val id: String,
-    override val source: Source,
-  ) : Asset
+  @SubclassOptInRequired(InternalKLibJevApi::class)
+  public interface Image : Asset
+
+  public companion object {
+    public fun Image(id: String, source: Source): Image = ImageImpl(id, source)
+  }
 }
