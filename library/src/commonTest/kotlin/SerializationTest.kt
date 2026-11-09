@@ -30,15 +30,16 @@ package org.jraf.klibjev
 import com.apollographql.mockserver.MockServer
 import com.apollographql.mockserver.enqueueError
 import com.apollographql.mockserver.enqueueString
+import io.ktor.client.request.invoke
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import okio.use
 import org.jraf.klibjev.client.JevClient
 import org.jraf.klibjev.client.JevClient.Configuration
-import org.jraf.klibjev.internal.model.ChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerNoulImpl
+import org.jraf.klibjev.internal.model.AnswerScoreImpl
 import org.jraf.klibjev.internal.model.EvaluateResponseImpl
-import org.jraf.klibjev.internal.model.NoulImpl
-import org.jraf.klibjev.internal.model.ScoreImpl
 import org.jraf.klibjev.model.Choice
 import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question
@@ -192,11 +193,11 @@ class SerializationTest {
           expected = EvaluateResponseImpl(
             model = "jev-1.13.0",
             answers = mapOf(
-              Noul(instructions = "Does this convey urgency?") to NoulImpl(value = 0.99),
+              Noul(instructions = "Does this convey urgency?") to AnswerNoulImpl(value = 0.99),
               Choice(
                 instructions = "What is the language of this text?",
                 options = setOf(Question.Choice.Option("English"), Question.Choice.Option("French"), Question.Choice.Option("Spanish")),
-              ) to ChoiceImpl(
+              ) to AnswerChoiceImpl(
                 highestProbability = Question.Choice.Option("French"),
                 probabilities = mapOf(
                   Question.Choice.Option("Spanish") to 0.0,
@@ -208,7 +209,7 @@ class SerializationTest {
               Score(
                 instructions = "How warm is this text?",
                 levels = listOf("Very cold", "Cold", "Neutral", "Warm", "Very warm"),
-              ) to ScoreImpl(
+              ) to AnswerScoreImpl(
                 value = 2.65,
                 probabilities = mapOf(
                   Question.Score.Level.String("Very cold") to 0.0,
@@ -220,7 +221,7 @@ class SerializationTest {
                 confidence = 0.69,
               ),
             ),
-            usage = org.jraf.klibjev.internal.model.UsageImpl(
+            usage = org.jraf.klibjev.internal.model.AnswerUsageImpl(
               inputTokens = 361,
               outputTokens = 71,
             ),

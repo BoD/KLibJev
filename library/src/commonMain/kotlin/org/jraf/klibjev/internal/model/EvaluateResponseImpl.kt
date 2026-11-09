@@ -34,21 +34,21 @@ internal data class EvaluateResponseImpl(
   override val usage: EvaluateResponse.Usage,
 ) : EvaluateResponse
 
-internal data class NoulImpl(override val value: Double) : EvaluateResponse.Answer.Noul
+internal data class AnswerNoulImpl(override val value: Double) : EvaluateResponse.Answer.Noul
 
-internal data class ChoiceImpl(
+internal data class AnswerChoiceImpl(
   override val highestProbability: Question.Choice.Option,
   override val probabilities: Map<Question.Choice.Option, Double>,
   override val confidence: Double,
 ) : EvaluateResponse.Answer.Choice
 
-internal data class ScoreImpl(
+internal data class AnswerScoreImpl(
   override val value: Double,
   override val probabilities: Map<Question.Score.Level, Double>,
   override val confidence: Double,
 ) : EvaluateResponse.Answer.Score
 
-internal data class BoxImpl(
+internal data class AnswerBoxImpl(
   override val top: Double,
   override val bottom: Double,
   override val left: Double,
@@ -56,7 +56,7 @@ internal data class BoxImpl(
   override val confidence: Double,
 ) : EvaluateResponse.Answer.Box
 
-internal data class UsageImpl(
+internal data class AnswerUsageImpl(
   override val inputTokens: Int,
   override val outputTokens: Int,
 ) : EvaluateResponse.Usage
