@@ -25,42 +25,50 @@
 
 package org.jraf.klibjev.model
 
-interface EvaluateResponse {
-  val model: String
-  val answers: Map<Question, Answer>
-  val usage: Usage
+import org.jraf.klibjev.InternalKLibJevApi
 
-  sealed interface Answer {
-    interface Noul : Answer {
+@SubclassOptInRequired(InternalKLibJevApi::class)
+public interface EvaluateResponse {
+  public val model: String
+  public val answers: Map<Question, Answer>
+  public val usage: Usage
+
+  public sealed interface Answer {
+    @SubclassOptInRequired(InternalKLibJevApi::class)
+    public interface Noul : Answer {
       /**
        * Between 0 and 1, inclusive.
        */
-      val value: Double
+      public val value: Double
     }
 
-    interface Choice : Answer {
-      val highestProbability: Question.Choice.Option
-      val probabilities: Map<Question.Choice.Option, Double>
-      val confidence: Double
+    @SubclassOptInRequired(InternalKLibJevApi::class)
+    public interface Choice : Answer {
+      public val highestProbability: Question.Choice.Option
+      public val probabilities: Map<Question.Choice.Option, Double>
+      public val confidence: Double
     }
 
-    interface Score : Answer {
-      val value: Double
-      val probabilities: Map<Question.Score.Level, Double>
-      val confidence: Double
+    @SubclassOptInRequired(InternalKLibJevApi::class)
+    public interface Score : Answer {
+      public val value: Double
+      public val probabilities: Map<Question.Score.Level, Double>
+      public val confidence: Double
     }
 
-    interface Box : Answer {
-      val top: Double
-      val bottom: Double
-      val left: Double
-      val right: Double
-      val confidence: Double
+    @SubclassOptInRequired(InternalKLibJevApi::class)
+    public interface Box : Answer {
+      public val top: Double
+      public val bottom: Double
+      public val left: Double
+      public val right: Double
+      public val confidence: Double
     }
   }
 
-  interface Usage {
-    val inputTokens: Int
-    val outputTokens: Int
+  @SubclassOptInRequired(InternalKLibJevApi::class)
+  public interface Usage {
+    public val inputTokens: Int
+    public val outputTokens: Int
   }
 }

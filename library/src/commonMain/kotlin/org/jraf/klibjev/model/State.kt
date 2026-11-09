@@ -29,25 +29,25 @@ import dev.drewhamilton.poko.Poko
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
-sealed interface State {
+public sealed interface State {
   @JvmInline
-  value class String(val value: kotlin.String) : State
+  public value class String(public val value: kotlin.String) : State
 
 
   @JvmInline
-  value class StringList(val value: List<kotlin.String>) : State
+  public value class StringList(public val value: List<kotlin.String>) : State
 
   /**
    * [T] must be [Serializable].
    */
   @Poko
-  class Object<T : Any>(val value: T) : State
+  public class Object<T : Any>(public val value: T) : State
 }
 
-fun State(value: String): State = State.String(value)
-fun State(value: List<String>): State = State.StringList(value)
+public fun State(value: String): State = State.String(value)
+public fun State(value: List<String>): State = State.StringList(value)
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> State(value: T): State = State.Object(value)
+public fun <T : Any> State(value: T): State = State.Object(value)

@@ -28,12 +28,12 @@ package org.jraf.klibjev.model
 import dev.drewhamilton.poko.Poko
 import kotlinx.io.Source
 
-sealed interface Asset {
-  val id: String
-  val source: Source
+public sealed interface Asset {
+  public val id: String
+  public val source: Source
 
   @Poko
-  class Image(
+  public class Image(
     override val id: String,
     override val source: Source,
   ) : Asset

@@ -25,31 +25,38 @@
 
 package org.jraf.klibjev.client
 
+import dev.drewhamilton.poko.Poko
+import org.jetbrains.kotlinx.library.api.watchdog.IntentionallyInconsistentParameterOrder
+import org.jraf.klibjev.InternalKLibJevApi
 import org.jraf.klibjev.internal.client.JevClientImpl
 import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
 import org.jraf.klibjev.model.State
 
-interface JevClient : AutoCloseable {
-  class Configuration(
-    val apiKey: String,
-    val model: String = "jev-latest",
-    val http: Http = Http(),
+@SubclassOptInRequired(InternalKLibJevApi::class)
+public interface JevClient : AutoCloseable {
+  @Poko
+  public class Configuration(
+    public val apiKey: String,
+    public val model: String = "jev-latest",
+    public val http: Http = Http(),
   ) {
-    class Http(
-      val urlBase: String = "https://api.typesafe.ai/v1/systemone",
-      val loggingLevel: LoggingLevel = LoggingLevel.NONE,
-      val logger: (message: String) -> Unit = { message -> println(message) },
-      val proxy: Proxy? = null,
-      val bypassSslChecks: Boolean = false,
+    @Poko
+    public class Http(
+      public val urlBase: String = "https://api.typesafe.ai/v1/systemone",
+      public val loggingLevel: LoggingLevel = LoggingLevel.NONE,
+      public val logger: (message: String) -> Unit = { message -> println(message) },
+      public val proxy: Proxy? = null,
+      public val bypassSslChecks: Boolean = false,
     ) {
-      class Proxy(
-        val host: String,
-        val port: Int,
+      @Poko
+      public class Proxy(
+        public val host: String,
+        public val port: Int,
       )
 
-      enum class LoggingLevel {
+      public enum class LoggingLevel {
         /**
          * No logs.
          */
@@ -62,22 +69,24 @@ interface JevClient : AutoCloseable {
     }
   }
 
-  suspend fun evaluate(
+  public suspend fun evaluate(
     state: State,
+    assets: Set<Asset>,
     questions: Set<Question>,
-    assets: Set<Asset> = emptySet(),
   ): Result<EvaluateResponse>
 }
 
-fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl(configuration)
+public fun JevClient(configuration: JevClient.Configuration): JevClient = JevClientImpl(configuration)
 
-suspend fun JevClient.evaluate(
+@IntentionallyInconsistentParameterOrder
+public suspend fun JevClient.evaluate(
   state: State,
   assets: Set<Asset>,
   vararg questions: Question,
 ): Result<EvaluateResponse> = evaluate(state = state, questions = questions.toSet(), assets = assets)
 
-suspend fun JevClient.evaluate(
+@IntentionallyInconsistentParameterOrder
+public suspend fun JevClient.evaluate(
   state: State,
   vararg questions: Question,
 ): Result<EvaluateResponse> = evaluate(state = state, questions = questions.toSet(), assets = emptySet())

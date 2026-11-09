@@ -35,142 +35,143 @@ import org.jraf.klibjev.model.Question.Score
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmName
 
-sealed interface Question {
-  val instructions: Instructions
+public sealed interface Question {
+  public val instructions: Instructions
 
   @Poko
-  class Noul(
-    override val instructions: Instructions,
-    val criteria: Criteria? = null,
+  public class Noul(
+    public override val instructions: Instructions,
+    public val criteria: Criteria? = null,
   ) : Question {
     @Poko
-    class Criteria(
-      val `true`: String,
-      val `false`: String,
+    public class Criteria(
+      public val `true`: String,
+      public val `false`: String,
     )
   }
 
   @Poko
-  class Choice(
-    override val instructions: Instructions,
+  public class Choice(
+    public override val instructions: Instructions,
 
     /**
      * Min: 2, max: 255.
      */
-    val options: Set<Option>,
+    public val options: Set<Option>,
   ) : Question {
     init {
       require(options.size in 2..255) { "options.size must be in 2..255, was ${options.size}" }
     }
 
     @Poko
-    class Option(
-      val name: String,
-      val description: String? = null,
+    public class Option(
+      public val name: String,
+      public val description: String? = null,
     )
   }
 
   @Poko
-  class Score(
-    override val instructions: Instructions,
+  public class Score(
+    public override val instructions: Instructions,
 
     /**
      * Min: 2, max: 10.
      */
-    val levels: List<Level>,
+    public val levels: List<Level>,
   ) : Question {
     init {
       require(levels.size in 2..10) { "levels.size must be in 2..10, was ${levels.size}" }
     }
 
-    sealed interface Level {
+    public sealed interface Level {
       @JvmInline
-      value class String(val value: kotlin.String) : Level
+      public value class String(public val value: kotlin.String) : Level
 
       /**
        * [T] must be [Serializable].
        */
       @Poko
-      class Object<T : Any>(val value: T) : Level
+      public class Object<T : Any>(public val value: T) : Level
     }
   }
 
   @Poko
-  class Box(
-    override val instructions: Instructions,
+  public class Box(
+    public override val instructions: Instructions,
   ) : Question
 
-  sealed interface Instructions {
+  public sealed interface Instructions {
     @JvmInline
-    value class String(val value: kotlin.String) : Instructions
+    public value class String(public val value: kotlin.String) : Instructions
 
 
     @JvmInline
-    value class StringList(val value: List<kotlin.String>) : Instructions
+    public value class StringList(public val value: List<kotlin.String>) : Instructions
 
     /**
      * [T] must be [Serializable].
      */
     @Poko
-    class Object<T : Any>(val value: T) : Instructions
+    public class Object<T : Any>(public val value: T) : Instructions
   }
 }
 
 // Noul
 
-fun Noul(instructions: String, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.String(instructions), criteria)
-fun Noul(instructions: List<String>, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.StringList(instructions), criteria)
+public fun Noul(instructions: String, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.String(instructions), criteria)
+public fun Noul(instructions: List<String>, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.StringList(instructions), criteria)
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Noul(instructions: T, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.Object(instructions), criteria)
+public fun <T : Any> Noul(instructions: T, criteria: Noul.Criteria? = null): Noul = Noul(Instructions.Object(instructions), criteria)
 
 
 // Choice
 
-fun Choice(instructions: String, options: Set<Choice.Option>): Choice = Choice(Instructions.String(instructions), options)
-fun Choice(instructions: List<String>, options: Set<Choice.Option>): Choice = Choice(Instructions.StringList(instructions), options)
+public fun Choice(instructions: String, options: Set<Choice.Option>): Choice = Choice(Instructions.String(instructions), options)
+public fun Choice(instructions: List<String>, options: Set<Choice.Option>): Choice = Choice(Instructions.StringList(instructions), options)
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Choice(instructions: T, options: Set<Choice.Option>): Choice = Choice(Instructions.Object(instructions), options)
+public fun <T : Any> Choice(instructions: T, options: Set<Choice.Option>): Choice = Choice(Instructions.Object(instructions), options)
 
-fun Choice(instructions: String, vararg options: Choice.Option): Choice = Choice(Instructions.String(instructions), options.toSet())
-fun Choice(instructions: List<String>, vararg options: Choice.Option): Choice =
+public fun Choice(instructions: String, vararg options: Choice.Option): Choice = Choice(Instructions.String(instructions), options.toSet())
+public fun Choice(instructions: List<String>, vararg options: Choice.Option): Choice =
   Choice(Instructions.StringList(instructions), options.toSet())
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Choice(instructions: T, vararg options: Choice.Option): Choice = Choice(Instructions.Object(instructions), options.toSet())
+public fun <T : Any> Choice(instructions: T, vararg options: Choice.Option): Choice =
+  Choice(Instructions.Object(instructions), options.toSet())
 
 
 // Score (Strings)
 
-fun Score(instructions: String, levels: List<String>): Score =
+public fun Score(instructions: String, levels: List<String>): Score =
   Score(Instructions.String(instructions), levels.map { Score.Level.String(it) })
 
-fun Score(instructions: List<String>, levels: List<String>): Score =
+public fun Score(instructions: List<String>, levels: List<String>): Score =
   Score(Instructions.StringList(instructions), levels.map { Score.Level.String(it) })
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Score(instructions: T, levels: List<String>): Score =
+public fun <T : Any> Score(instructions: T, levels: List<String>): Score =
   Score(Instructions.Object(instructions), levels.map { Score.Level.String(it) })
 
-fun Score(instructions: String, vararg levels: String): Score =
+public fun Score(instructions: String, vararg levels: String): Score =
   Score(Instructions.String(instructions), levels.map { Score.Level.String(it) })
 
-fun Score(instructions: List<String>, vararg levels: String): Score =
+public fun Score(instructions: List<String>, vararg levels: String): Score =
   Score(Instructions.StringList(instructions), levels.map { Score.Level.String(it) })
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Score(instructions: T, vararg levels: String): Score =
+public fun <T : Any> Score(instructions: T, vararg levels: String): Score =
   Score(Instructions.Object(instructions), levels.map { Score.Level.String(it) })
 
 
@@ -180,48 +181,48 @@ fun <T : Any> Score(instructions: T, vararg levels: String): Score =
  * [L] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <L : Any> Score(instructions: String, levels: List<L>): Score =
+public fun <L : Any> Score(instructions: String, levels: List<L>): Score =
   Score(Instructions.String(instructions), levels.map { Score.Level.Object(it) })
 
 /**
  * [L] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <L : Any> Score(instructions: List<String>, levels: List<L>): Score =
+public fun <L : Any> Score(instructions: List<String>, levels: List<L>): Score =
   Score(Instructions.StringList(instructions), levels.map { Score.Level.Object(it) })
 
 /**
  * [L] and [T] must be [Serializable].
  */
 @JvmName("ScoreObjects")
-fun <T : Any, L : Any> Score(instructions: T, levels: List<L>): Score =
+public fun <T : Any, L : Any> Score(instructions: T, levels: List<L>): Score =
   Score(Instructions.Object(instructions), levels.map { Score.Level.Object(it) })
 
 /**
  * [L] must be [Serializable].
  */
-fun <L : Any> Score(instructions: String, vararg levels: L): Score =
+public fun <L : Any> Score(instructions: String, vararg levels: L): Score =
   Score(Instructions.String(instructions), levels.map { Score.Level.Object(it) })
 
 /**
  * [L] must be [Serializable].
  */
-fun <L : Any> Score(instructions: List<String>, vararg levels: L): Score =
+public fun <L : Any> Score(instructions: List<String>, vararg levels: L): Score =
   Score(Instructions.StringList(instructions), levels.map { Score.Level.Object(it) })
 
 /**
  * [L] and [T] must be [Serializable].
  */
-fun <T : Any, L : Any> Score(instructions: T, vararg levels: L): Score =
+public fun <T : Any, L : Any> Score(instructions: T, vararg levels: L): Score =
   Score(Instructions.Object(instructions), levels.map { Score.Level.Object(it) })
 
 
 // Box
 
-fun Box(instructions: String): Box = Box(Instructions.String(instructions))
-fun Box(instructions: List<String>): Box = Box(Instructions.StringList(instructions))
+public fun Box(instructions: String): Box = Box(Instructions.String(instructions))
+public fun Box(instructions: List<String>): Box = Box(Instructions.StringList(instructions))
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> Box(instructions: T): Box = Box(Instructions.Object(instructions))
+public fun <T : Any> Box(instructions: T): Box = Box(Instructions.Object(instructions))
