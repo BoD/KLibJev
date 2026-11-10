@@ -1,6 +1,7 @@
 # Next version (unreleased)
 
 - Remove klibnanolog dependency and add logger http configuration
+- All models are now interfaces
 
 # v1.1.0 - 2026-10-21
 

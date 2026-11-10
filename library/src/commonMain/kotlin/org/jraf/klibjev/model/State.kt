@@ -25,29 +25,47 @@
 
 package org.jraf.klibjev.model
 
-import dev.drewhamilton.poko.Poko
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmInline
+import org.jraf.klibjev.InternalKLibJevApi
+import org.jraf.klibjev.internal.model.StateObjectImpl
+import org.jraf.klibjev.internal.model.StateStringImpl
+import org.jraf.klibjev.internal.model.StateStringListImpl
 
-sealed interface State {
-  @JvmInline
-  value class String(val value: kotlin.String) : State
+public sealed interface State {
+  @SubclassOptInRequired(InternalKLibJevApi::class)
+  public interface String : State {
+    public val value: kotlin.String
+  }
 
-
-  @JvmInline
-  value class StringList(val value: List<kotlin.String>) : State
+  @SubclassOptInRequired(InternalKLibJevApi::class)
+  public interface StringList : State {
+    public val value: List<kotlin.String>
+  }
 
   /**
    * [T] must be [Serializable].
    */
-  @Poko
-  class Object<T : Any>(val value: T) : State
+  @SubclassOptInRequired(InternalKLibJevApi::class)
+  public interface Object<T : Any> : State {
+    public val value: T
+  }
+
+  public companion object {
+    public fun String(value: kotlin.String): String = StateStringImpl(value)
+
+    public fun StringList(value: List<kotlin.String>): StringList = StateStringListImpl(value)
+
+    /**
+     * [T] must be [Serializable].
+     */
+    public fun <T : Any> Object(value: T): Object<T> = StateObjectImpl(value)
+  }
 }
 
-fun State(value: String): State = State.String(value)
-fun State(value: List<String>): State = State.StringList(value)
+public fun State(value: String): State = State.String(value)
+public fun State(value: List<String>): State = State.StringList(value)
 
 /**
  * [T] must be [Serializable].
  */
-fun <T : Any> State(value: T): State = State.Object(value)
+public fun <T : Any> State(value: T): State = State.Object(value)

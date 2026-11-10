@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.kotlin.serialization).apply(false)
   alias(libs.plugins.librarian).apply(false)
   alias(libs.plugins.poko).apply(false)
+  alias(libs.plugins.kotlin.apiWatchdog).apply(false)
 }
 
 Librarian.root(project)

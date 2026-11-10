@@ -34,11 +34,12 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import okio.use
 import org.jraf.klibjev.client.JevClient
+import org.jraf.klibjev.client.JevClient.Companion.Configuration
 import org.jraf.klibjev.client.JevClient.Configuration
-import org.jraf.klibjev.internal.model.ChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerNoulImpl
+import org.jraf.klibjev.internal.model.AnswerScoreImpl
 import org.jraf.klibjev.internal.model.EvaluateResponseImpl
-import org.jraf.klibjev.internal.model.NoulImpl
-import org.jraf.klibjev.internal.model.ScoreImpl
 import org.jraf.klibjev.model.Choice
 import org.jraf.klibjev.model.Noul
 import org.jraf.klibjev.model.Question
@@ -54,6 +55,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
@@ -70,6 +72,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         jevClient.evaluate(
           state = State(listOf("Help! My payouts have been failing for 3 days.")),
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Does this convey urgency?")),
         )
         assertEquals(
@@ -106,6 +109,7 @@ class SerializationTest {
 
         jevClient.evaluate(
           state = state,
+          assets = emptySet(),
           questions = setOf(Noul(instructions = "Is the customer asking for a refund?")),
         )
         assertEquals(
@@ -172,6 +176,7 @@ class SerializationTest {
       JevClient(Configuration(apiKey = "xxx", http = Configuration.Http(mockServer.url()))).use { jevClient ->
         val answers = jevClient.evaluate(
           state = State("Help! My payouts have been failing for 3 days."),
+          assets = emptySet(),
           questions = setOf(
             Noul(instructions = "Does this convey urgency?"),
             Choice(
@@ -192,11 +197,11 @@ class SerializationTest {
           expected = EvaluateResponseImpl(
             model = "jev-1.13.0",
             answers = mapOf(
-              Noul(instructions = "Does this convey urgency?") to NoulImpl(value = 0.99),
+              Noul(instructions = "Does this convey urgency?") to AnswerNoulImpl(value = 0.99),
               Choice(
                 instructions = "What is the language of this text?",
                 options = setOf(Question.Choice.Option("English"), Question.Choice.Option("French"), Question.Choice.Option("Spanish")),
-              ) to ChoiceImpl(
+              ) to AnswerChoiceImpl(
                 highestProbability = Question.Choice.Option("French"),
                 probabilities = mapOf(
                   Question.Choice.Option("Spanish") to 0.0,
@@ -208,7 +213,7 @@ class SerializationTest {
               Score(
                 instructions = "How warm is this text?",
                 levels = listOf("Very cold", "Cold", "Neutral", "Warm", "Very warm"),
-              ) to ScoreImpl(
+              ) to AnswerScoreImpl(
                 value = 2.65,
                 probabilities = mapOf(
                   Question.Score.Level.String("Very cold") to 0.0,
@@ -220,7 +225,7 @@ class SerializationTest {
                 confidence = 0.69,
               ),
             ),
-            usage = org.jraf.klibjev.internal.model.UsageImpl(
+            usage = org.jraf.klibjev.internal.model.AnswerUsageImpl(
               inputTokens = 361,
               outputTokens = 71,
             ),

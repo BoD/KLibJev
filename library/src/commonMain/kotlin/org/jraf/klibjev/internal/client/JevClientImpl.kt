@@ -54,12 +54,12 @@ import org.jraf.klibjev.internal.json.JsonAsset
 import org.jraf.klibjev.internal.json.JsonEvaluateRequest
 import org.jraf.klibjev.internal.json.JsonEvaluateResponse
 import org.jraf.klibjev.internal.json.JsonQuestion
-import org.jraf.klibjev.internal.model.BoxImpl
-import org.jraf.klibjev.internal.model.ChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerBoxImpl
+import org.jraf.klibjev.internal.model.AnswerChoiceImpl
+import org.jraf.klibjev.internal.model.AnswerNoulImpl
+import org.jraf.klibjev.internal.model.AnswerScoreImpl
+import org.jraf.klibjev.internal.model.AnswerUsageImpl
 import org.jraf.klibjev.internal.model.EvaluateResponseImpl
-import org.jraf.klibjev.internal.model.NoulImpl
-import org.jraf.klibjev.internal.model.ScoreImpl
-import org.jraf.klibjev.internal.model.UsageImpl
 import org.jraf.klibjev.model.Asset
 import org.jraf.klibjev.model.EvaluateResponse
 import org.jraf.klibjev.model.Question
@@ -135,8 +135,8 @@ internal class JevClientImpl(
 
   override suspend fun evaluate(
     state: State,
-    questions: Set<Question>,
     assets: Set<Asset>,
+    questions: Set<Question>,
   ): Result<EvaluateResponse> {
     val questionsById: Map<String, Question> = questions.toList().mapIndexed { index, question -> "q$index" to question }.toMap()
     val jsonEvaluateRequest = JsonEvaluateRequest(
@@ -232,7 +232,7 @@ private fun JsonEvaluateResponse.toEvaluateResponse(questionsById: Map<String, Q
       val question = questionsById[questionId]
       (question ?: error("Unknown question ID: $questionId")) to answer.toAnswer(question)
     }.toMap(),
-    usage = UsageImpl(
+    usage = AnswerUsageImpl(
       inputTokens = this.usage.input_tokens,
       outputTokens = this.usage.output_tokens,
     ),
@@ -241,11 +241,11 @@ private fun JsonEvaluateResponse.toEvaluateResponse(questionsById: Map<String, Q
 
 private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
   return when (this) {
-    is JsonAnswer.Noul -> NoulImpl(
+    is JsonAnswer.Noul -> AnswerNoulImpl(
       value = this.noul,
     )
 
-    is JsonAnswer.Choice -> ChoiceImpl(
+    is JsonAnswer.Choice -> AnswerChoiceImpl(
       highestProbability = (question as Question.Choice).options.first { it.name == this.choice },
       probabilities = this.probabilities.map { (optionName, probability) ->
         val option = question.options.firstOrNull { it.name == optionName }
@@ -255,7 +255,7 @@ private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
       confidence = this.confidence,
     )
 
-    is JsonAnswer.Score -> ScoreImpl(
+    is JsonAnswer.Score -> AnswerScoreImpl(
       value = this.score,
       probabilities = this.probabilities.map { (levelIndex, probability) ->
         val level = when (val levelJsonElement: JsonElement = this.legend[levelIndex]!!) {
@@ -276,7 +276,7 @@ private fun JsonAnswer.toAnswer(question: Question): EvaluateResponse.Answer {
       confidence = this.confidence,
     )
 
-    is JsonAnswer.Box -> BoxImpl(
+    is JsonAnswer.Box -> AnswerBoxImpl(
       top = this.box.top,
       bottom = this.box.bottom,
       left = this.box.left,

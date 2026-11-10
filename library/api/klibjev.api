@@ -1,29 +1,43 @@
+public abstract interface annotation class org/jraf/klibjev/InternalKLibJevApi : java/lang/annotation/Annotation {
+}
+
 public final class org/jraf/klibjev/VersionKt {
 	public static final field VERSION Ljava/lang/String;
 }
 
 public abstract interface class org/jraf/klibjev/client/JevClient : java/lang/AutoCloseable {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Companion;
 	public abstract fun evaluate-BWLJW6A (Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getApiKey ()Ljava/lang/String;
-	public final fun getHttp ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
-	public final fun getModel ()Ljava/lang/String;
+public final class org/jraf/klibjev/client/JevClient$Companion {
+	public final fun Configuration (Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;)Lorg/jraf/klibjev/client/JevClient$Configuration;
+	public static synthetic fun Configuration$default (Lorg/jraf/klibjev/client/JevClient$Companion;Ljava/lang/String;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http;ILjava/lang/Object;)Lorg/jraf/klibjev/client/JevClient$Configuration;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration$Http {
-	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;Z)V
-	public synthetic fun <init> (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getBypassSslChecks ()Z
-	public final fun getLogger ()Lkotlin/jvm/functions/Function1;
-	public final fun getLoggingLevel ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
-	public final fun getProxy ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
-	public final fun getUrlBase ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Configuration$Companion;
+	public abstract fun getApiKey ()Ljava/lang/String;
+	public abstract fun getHttp ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+	public abstract fun getModel ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/client/JevClient$Configuration$Companion {
+	public final fun Http (Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;Z)Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+	public static synthetic fun Http$default (Lorg/jraf/klibjev/client/JevClient$Configuration$Companion;Ljava/lang/String;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;Lkotlin/jvm/functions/Function1;Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;ZILjava/lang/Object;)Lorg/jraf/klibjev/client/JevClient$Configuration$Http;
+}
+
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration$Http {
+	public static final field Companion Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Companion;
+	public abstract fun getBypassSslChecks ()Z
+	public abstract fun getLogger ()Lkotlin/jvm/functions/Function1;
+	public abstract fun getLoggingLevel ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
+	public abstract fun getProxy ()Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
+	public abstract fun getUrlBase ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Companion {
+	public final fun Proxy (Ljava/lang/String;I)Lorg/jraf/klibjev/client/JevClient$Configuration$Http$Proxy;
 }
 
 public final class org/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel : java/lang/Enum {
@@ -37,14 +51,9 @@ public final class org/jraf/klibjev/client/JevClient$Configuration$Http$LoggingL
 	public static fun values ()[Lorg/jraf/klibjev/client/JevClient$Configuration$Http$LoggingLevel;
 }
 
-public final class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
-	public fun <init> (Ljava/lang/String;I)V
-	public final fun getHost ()Ljava/lang/String;
-	public final fun getPort ()I
-}
-
-public final class org/jraf/klibjev/client/JevClient$DefaultImpls {
-	public static synthetic fun evaluate-BWLJW6A$default (Lorg/jraf/klibjev/client/JevClient;Lorg/jraf/klibjev/model/State;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+public abstract interface class org/jraf/klibjev/client/JevClient$Configuration$Http$Proxy {
+	public abstract fun getHost ()Ljava/lang/String;
+	public abstract fun getPort ()I
 }
 
 public final class org/jraf/klibjev/client/JevClientKt {
@@ -54,17 +63,16 @@ public final class org/jraf/klibjev/client/JevClientKt {
 }
 
 public abstract interface class org/jraf/klibjev/model/Asset {
+	public static final field Companion Lorg/jraf/klibjev/model/Asset$Companion;
 	public abstract fun getId ()Ljava/lang/String;
 	public abstract fun getSource ()Lkotlinx/io/Source;
 }
 
-public final class org/jraf/klibjev/model/Asset$Image : org/jraf/klibjev/model/Asset {
-	public fun <init> (Ljava/lang/String;Lkotlinx/io/Source;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public fun getId ()Ljava/lang/String;
-	public fun getSource ()Lkotlinx/io/Source;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Asset$Companion {
+	public final fun Image (Ljava/lang/String;Lkotlinx/io/Source;)Lorg/jraf/klibjev/model/Asset$Image;
+}
+
+public abstract interface class org/jraf/klibjev/model/Asset$Image : org/jraf/klibjev/model/Asset {
 }
 
 public abstract interface class org/jraf/klibjev/model/EvaluateResponse {
@@ -106,126 +114,91 @@ public abstract interface class org/jraf/klibjev/model/EvaluateResponse$Usage {
 }
 
 public abstract interface class org/jraf/klibjev/model/Question {
+	public static final field Companion Lorg/jraf/klibjev/model/Question$Companion;
 	public abstract fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
 }
 
-public final class org/jraf/klibjev/model/Question$Box : org/jraf/klibjev/model/Question {
-	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Box : org/jraf/klibjev/model/Question {
 }
 
-public final class org/jraf/klibjev/model/Question$Choice : org/jraf/klibjev/model/Question {
-	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/Set;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
-	public final fun getOptions ()Ljava/util/Set;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Choice : org/jraf/klibjev/model/Question {
+	public static final field Companion Lorg/jraf/klibjev/model/Question$Choice$Companion;
+	public abstract fun getOptions ()Ljava/util/Set;
 }
 
-public final class org/jraf/klibjev/model/Question$Choice$Option {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getDescription ()Ljava/lang/String;
-	public final fun getName ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Question$Choice$Companion {
+	public final fun Option (Ljava/lang/String;Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Choice$Option;
+	public static synthetic fun Option$default (Lorg/jraf/klibjev/model/Question$Choice$Companion;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lorg/jraf/klibjev/model/Question$Choice$Option;
+}
+
+public abstract interface class org/jraf/klibjev/model/Question$Choice$Option {
+	public abstract fun getDescription ()Ljava/lang/String;
+	public abstract fun getName ()Ljava/lang/String;
+}
+
+public final class org/jraf/klibjev/model/Question$Companion {
+	public final fun Box (Lorg/jraf/klibjev/model/Question$Instructions;)Lorg/jraf/klibjev/model/Question$Box;
+	public final fun Choice (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/Set;)Lorg/jraf/klibjev/model/Question$Choice;
+	public final fun Noul (Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)Lorg/jraf/klibjev/model/Question$Noul;
+	public static synthetic fun Noul$default (Lorg/jraf/klibjev/model/Question$Companion;Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILjava/lang/Object;)Lorg/jraf/klibjev/model/Question$Noul;
+	public final fun Score (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Score;
 }
 
 public abstract interface class org/jraf/klibjev/model/Question$Instructions {
+	public static final field Companion Lorg/jraf/klibjev/model/Question$Instructions$Companion;
 }
 
-public final class org/jraf/klibjev/model/Question$Instructions$Object : org/jraf/klibjev/model/Question$Instructions {
-	public fun <init> (Ljava/lang/Object;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/Object;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Question$Instructions$Companion {
+	public final fun Object (Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Instructions$Object;
+	public final fun String (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Instructions$String;
+	public final fun StringList (Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Instructions$StringList;
 }
 
-public final class org/jraf/klibjev/model/Question$Instructions$String : org/jraf/klibjev/model/Question$Instructions {
-	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Instructions$String;
-	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/lang/String;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Instructions$Object : org/jraf/klibjev/model/Question$Instructions {
+	public abstract fun getValue ()Ljava/lang/Object;
 }
 
-public final class org/jraf/klibjev/model/Question$Instructions$StringList : org/jraf/klibjev/model/Question$Instructions {
-	public static final synthetic fun box-impl (Ljava/util/List;)Lorg/jraf/klibjev/model/Question$Instructions$StringList;
-	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
-	public final fun getValue ()Ljava/util/List;
-	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/util/List;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/util/List;
+public abstract interface class org/jraf/klibjev/model/Question$Instructions$String : org/jraf/klibjev/model/Question$Instructions {
+	public abstract fun getValue ()Ljava/lang/String;
 }
 
-public final class org/jraf/klibjev/model/Question$Noul : org/jraf/klibjev/model/Question {
-	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;)V
-	public synthetic fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Lorg/jraf/klibjev/model/Question$Noul$Criteria;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getCriteria ()Lorg/jraf/klibjev/model/Question$Noul$Criteria;
-	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Instructions$StringList : org/jraf/klibjev/model/Question$Instructions {
+	public abstract fun getValue ()Ljava/util/List;
 }
 
-public final class org/jraf/klibjev/model/Question$Noul$Criteria {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getFalse ()Ljava/lang/String;
-	public final fun getTrue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Noul : org/jraf/klibjev/model/Question {
+	public static final field Companion Lorg/jraf/klibjev/model/Question$Noul$Companion;
+	public abstract fun getCriteria ()Lorg/jraf/klibjev/model/Question$Noul$Criteria;
 }
 
-public final class org/jraf/klibjev/model/Question$Score : org/jraf/klibjev/model/Question {
-	public fun <init> (Lorg/jraf/klibjev/model/Question$Instructions;Ljava/util/List;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public fun getInstructions ()Lorg/jraf/klibjev/model/Question$Instructions;
-	public final fun getLevels ()Ljava/util/List;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Question$Noul$Companion {
+	public final fun Criteria (Ljava/lang/String;Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Noul$Criteria;
+}
+
+public abstract interface class org/jraf/klibjev/model/Question$Noul$Criteria {
+	public abstract fun getFalse ()Ljava/lang/String;
+	public abstract fun getTrue ()Ljava/lang/String;
+}
+
+public abstract interface class org/jraf/klibjev/model/Question$Score : org/jraf/klibjev/model/Question {
+	public abstract fun getLevels ()Ljava/util/List;
 }
 
 public abstract interface class org/jraf/klibjev/model/Question$Score$Level {
+	public static final field Companion Lorg/jraf/klibjev/model/Question$Score$Level$Companion;
 }
 
-public final class org/jraf/klibjev/model/Question$Score$Level$Object : org/jraf/klibjev/model/Question$Score$Level {
-	public fun <init> (Ljava/lang/Object;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/Object;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/Question$Score$Level$Companion {
+	public final fun Object (Ljava/lang/Object;)Lorg/jraf/klibjev/model/Question$Score$Level$Object;
+	public final fun String (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score$Level$String;
 }
 
-public final class org/jraf/klibjev/model/Question$Score$Level$String : org/jraf/klibjev/model/Question$Score$Level {
-	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/Question$Score$Level$String;
-	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/lang/String;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/Question$Score$Level$Object : org/jraf/klibjev/model/Question$Score$Level {
+	public abstract fun getValue ()Ljava/lang/Object;
+}
+
+public abstract interface class org/jraf/klibjev/model/Question$Score$Level$String : org/jraf/klibjev/model/Question$Score$Level {
+	public abstract fun getValue ()Ljava/lang/String;
 }
 
 public final class org/jraf/klibjev/model/QuestionKt {
@@ -259,42 +232,25 @@ public final class org/jraf/klibjev/model/QuestionKt {
 }
 
 public abstract interface class org/jraf/klibjev/model/State {
+	public static final field Companion Lorg/jraf/klibjev/model/State$Companion;
 }
 
-public final class org/jraf/klibjev/model/State$Object : org/jraf/klibjev/model/State {
-	public fun <init> (Ljava/lang/Object;)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/Object;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class org/jraf/klibjev/model/State$Companion {
+	public final fun Object (Ljava/lang/Object;)Lorg/jraf/klibjev/model/State$Object;
+	public final fun String (Ljava/lang/String;)Lorg/jraf/klibjev/model/State$String;
+	public final fun StringList (Ljava/util/List;)Lorg/jraf/klibjev/model/State$StringList;
 }
 
-public final class org/jraf/klibjev/model/State$String : org/jraf/klibjev/model/State {
-	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/jraf/klibjev/model/State$String;
-	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/lang/String;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/lang/String;
+public abstract interface class org/jraf/klibjev/model/State$Object : org/jraf/klibjev/model/State {
+	public abstract fun getValue ()Ljava/lang/Object;
 }
 
-public final class org/jraf/klibjev/model/State$StringList : org/jraf/klibjev/model/State {
-	public static final synthetic fun box-impl (Ljava/util/List;)Lorg/jraf/klibjev/model/State$StringList;
-	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
-	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
-	public final fun getValue ()Ljava/util/List;
-	public fun hashCode ()I
-	public static fun hashCode-impl (Ljava/util/List;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()Ljava/util/List;
+public abstract interface class org/jraf/klibjev/model/State$String : org/jraf/klibjev/model/State {
+	public abstract fun getValue ()Ljava/lang/String;
+}
+
+public abstract interface class org/jraf/klibjev/model/State$StringList : org/jraf/klibjev/model/State {
+	public abstract fun getValue ()Ljava/util/List;
 }
 
 public final class org/jraf/klibjev/model/StateKt {

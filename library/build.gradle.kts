@@ -1,15 +1,22 @@
 import com.gradleup.librarian.gradle.Librarian
+import org.jetbrains.kotlinx.library.api.watchdog.WatchdogSeverity
 
 plugins {
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.poko)
+  alias(libs.plugins.kotlin.apiWatchdog)
 }
 
 kotlin {
-  jvm()
+  explicitApiWarning()
 
+  jvm()
   macosArm64()
+
+  compilerOptions {
+    optIn.add("org.jraf.klibjev.InternalKLibJevApi")
+  }
 
   sourceSets {
     commonMain {
@@ -57,6 +64,15 @@ kotlin {
         implementation(libs.ktor.client.curl)
       }
     }
+  }
+}
+
+apiWatchdog {
+  undocumentedPublicApi = WatchdogSeverity.NONE
+  exhaustivePublicApi = WatchdogSeverity.NONE
+
+  javaInterop {
+    enabled = false
   }
 }
 
