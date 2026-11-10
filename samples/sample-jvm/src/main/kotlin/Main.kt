@@ -46,7 +46,7 @@ suspend fun main(av: Array<String>) {
     configuration = Configuration(
       apiKey = av[0],
       http = Http(
-        loggingLevel = LoggingLevel.ALL,
+        loggingLevel = LoggingLevel.INFO,
 //        proxy = Http.Proxy("localhost", 8888),
 //        bypassSslChecks = true,
       ),
@@ -55,17 +55,17 @@ suspend fun main(av: Array<String>) {
   ).use { jevClient ->
     val answers1 = jevClient.evaluate(
       state = State("Bonjour !"),
-      Noul(instructions = "Is this a greeting?"),
+      Noul("Is this a greeting?"),
 
       Choice(
-        instructions = "What is the language of this text?",
+        "What is the language of this text?",
         Option("English"),
         Option("French"),
         Option("Spanish"),
       ),
 
       Score(
-        instructions = ComplexInstructions(
+        ComplexInstructions(
           question = "How warm is this text?",
           moreDetails = "The temperature of the text can be interpreted as how friendly or welcoming it feels.",
         ),
@@ -87,7 +87,7 @@ suspend fun main(av: Array<String>) {
         ),
       ),
       Choice(
-        instructions = "What is the main object in the image?",
+        "What is the main object in the image?",
         Option("Apple"),
         Option("Banana"),
         Option("Strawberry"),
@@ -97,6 +97,7 @@ suspend fun main(av: Array<String>) {
     ).getOrThrow()
     println("Answers 2: $answers2")
 
+    val question3 = Box("Raspberry")
     val answers3 = jevClient.evaluate(
       state = State("`image1`"),
       assets = setOf(
@@ -105,11 +106,9 @@ suspend fun main(av: Array<String>) {
           source = File("samples/sample-jvm/assets/strawberry-raspberry.png").inputStream().asSource().buffered(),
         ),
       ),
-      Box(
-        instructions = "Raspberry",
-      ),
+      question3,
     ).getOrThrow()
-    val boxAnswer = answers3.answers.values.firstOrNull() as Answer.Box
+    val boxAnswer = answers3.answers[question3] as Answer.Box
     val imageWidth = 1568
     val imageHeight = 887
     println("Answers 3: top=${boxAnswer.top * imageHeight}, bottom=${boxAnswer.bottom * imageHeight}, left=${boxAnswer.left * imageWidth}, right=${boxAnswer.right * imageWidth}")

@@ -20,12 +20,11 @@ dependencies {
 Create a client with your Jev API key and call `evaluate`:
 
 ```kotlin
-JevClient(JevClient.Configuration(apiKey = "YOUR_API_KEY")).use { client ->
-  val answers = client.evaluate(
-    State("Bonjour !"),
-    Noul(instructions = "Is this a greeting?"),
-  ).getOrThrow().answers
-  println(answers)
+JevClient(JevClient.Configuration("YOUR_API_KEY")).use { client ->
+  val state = State("Bonjour !")
+  val question = Noul("Is this a greeting?")
+  val answer = client.evaluate(state, question).getOrThrow().answers[question]
+  println(answer)
 }
 ```
 
